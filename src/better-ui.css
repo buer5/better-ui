@@ -1,0 +1,1424 @@
+/* better-ui — styles. The class names and ids are part of the rules: write pages in index.html's structure. */
+/* ===== app.css ===== */
+:root {
+  --bg: #f4f4f6;
+  --card: #ffffff;
+  --card-2: #f9f9fb;      /* expanded editor */
+  --pill: #f1f1f4;
+  --pill-hover: #e9e9ee;
+  /* the header's view switch: its track and the thumb on the view shown, the
+     track a shade deeper than a pill so the white thumb stands off it (#477) */
+  --seg-track: #e6e6eb;
+  --seg-thumb: var(--card);
+  --seg-edge: 0 1px 2px rgba(0, 0, 0, .14), 0 0 0 .5px rgba(0, 0, 0, .08);
+  /* a control's quiet text (the switch's other views, a text button): darker
+     than --muted, so it reads at 4.5:1 or better on every surface it sits on */
+  --ctl-fg: #63636b;
+  --line: #e3e3e8;
+  --line-2: #ececf0;
+  --fg: #1c1c21;
+  --fg-2: #4b4b53;
+  --muted: #85858d;
+  --faint: #b9b9c2;
+  --accent: #4f46e5;
+  --accent-soft: #eeedfd;
+  --accent-fg: #ffffff;
+  --sel: #ecebfb;
+  --green: #189a58;
+  --green-soft: #e4f6ec;
+  --red: #d64545;
+  --red-soft: #fbe9e9;
+  --amber: #b45309;
+  --amber-soft: #fbf0df;
+    --drift: #ce2c31;
+  --drift-soft: #feebec;
+  --pop-bg: rgba(255, 255, 255, .94);
+  --shadow: 0 16px 44px rgba(20, 22, 30, .16), 0 2px 8px rgba(20, 22, 30, .06), 0 0 0 .5px rgba(20, 22, 30, .1);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --logo-invert: 0;
+  --tk-s: #1a7f45; --tk-k: #7c3aed; --tk-f: #1d4ed8; --tk-n: #b45309; --tk-v: #0e7490; --tk-o: #a21caf; --tk-c: #85858d;
+  /* what a chart tells apart: providers, agents, models */
+  --c1: #4f46e5; --c2: #0ea5e9; --c3: #10b981; --c4: #f59e0b; --c5: #ec4899; --c6: #8b5cf6; --c7: #64748b;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+    --bg: #1a1a1e;
+    --card: #232327;
+    --card-2: #1f1f23;
+    --pill: #2d2d33;
+    --pill-hover: #36363d;
+    --seg-track: rgba(255, 255, 255, .035);
+    --seg-thumb: rgba(255, 255, 255, .15);
+    --seg-edge: inset 0 .5px 0 rgba(255, 255, 255, .08), 0 1px 2px rgba(0, 0, 0, .3);
+    --line: #333339;
+    --line-2: #2c2c32;
+    --fg: #ededf1;
+    --fg-2: #b9b9c1;
+    --muted: #8b8b94;
+    --faint: #56565f;
+    --ctl-fg: #a1a1aa;
+    --accent: #a5b4fc;
+    --accent-soft: #2b2c47;
+    --accent-fg: #14142a;
+    --sel: #33345a;
+    --green: #6fd99b;
+    --green-soft: #1e3a2b;
+    --red: #f28b82;
+    --red-soft: #45272a;
+    --amber: #f2b544;
+    --amber-soft: #3f3220;
+    --drift: #ff9592;
+    --drift-soft: #3b1219;
+    --pop-bg: rgba(38, 38, 43, .96);
+    --shadow: 0 16px 44px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .3), 0 0 0 .5px rgba(255, 255, 255, .1);
+    --logo-invert: 1;
+    --tk-s: #98d8a4; --tk-k: #c4b5fd; --tk-f: #93c5fd; --tk-n: #f2b544; --tk-v: #67e8f9; --tk-o: #f0abfc; --tk-c: #8b8b94;
+    --c1: #a5b4fc; --c2: #7dd3fc; --c3: #6ee7b7; --c4: #fcd34d; --c5: #f9a8d4; --c6: #c4b5fd; --c7: #94a3b8;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1a1e; --card: #232327; --card-2: #1f1f23; --pill: #2d2d33; --pill-hover: #36363d;
+  --seg-track: rgba(255, 255, 255, .035); --seg-thumb: rgba(255, 255, 255, .15); --seg-edge: inset 0 .5px 0 rgba(255, 255, 255, .08), 0 1px 2px rgba(0, 0, 0, .3);
+  --line: #333339; --line-2: #2c2c32; --fg: #ededf1; --fg-2: #b9b9c1; --muted: #8b8b94; --faint: #56565f; --ctl-fg: #a1a1aa;
+  --accent: #a5b4fc; --accent-soft: #2b2c47; --accent-fg: #14142a; --sel: #33345a;
+  --green: #6fd99b; --green-soft: #1e3a2b; --red: #f28b82; --red-soft: #45272a; --amber: #f2b544; --amber-soft: #3f3220;
+  --drift: #ff9592; --drift-soft: #3b1219;
+  --pop-bg: rgba(38, 38, 43, .96);
+  --shadow: 0 16px 44px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .3), 0 0 0 .5px rgba(255, 255, 255, .1);
+  --logo-invert: 1;
+  --tk-s: #98d8a4; --tk-k: #c4b5fd; --tk-f: #93c5fd; --tk-n: #f2b544; --tk-v: #67e8f9; --tk-o: #f0abfc; --tk-c: #8b8b94;
+  --c1: #a5b4fc; --c2: #7dd3fc; --c3: #6ee7b7; --c4: #fcd34d; --c5: #f9a8d4; --c6: #c4b5fd; --c7: #94a3b8;
+}
+/* Okabe–Ito qualitative series (#2073): adjacent series stay apart in hue and
+   lightness in both light and dark themes */
+:root[data-colorblind="1"] {
+  --c1: #0072b2; --c2: #e69f00; --c3: #009e73; --c4: #d55e00; --c5: #cc79a7; --c6: #56b4e9; --c7: #64748b;
+}
+/* Windows' own text faces, and Chinese in YaHei UI, its UI face for it, not
+   the webview's fallback; the Mac's and Linux's stack is the one above */
+:root.win { --font: "Segoe UI Variable Text", "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif; }
+/* and its code faces, with YaHei UI for the Chinese in them: the generic
+   monospace is SimSun on a Chinese Windows, thin and unhinted at 11px (#690) */
+:root.win { --code: "Cascadia Mono", Consolas, "Microsoft YaHei UI", "Microsoft YaHei", monospace; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font: var(--ui-style, normal) var(--ui-weight, 400) 13px/1.4 var(--ui-font, var(--font)); font-stretch: var(--ui-stretch, 100%);
+  color: var(--fg);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+/* What the window shows can be selected and copied: what a request and
+   its vendor said, a conversation, an error, a hint, a value in a detail
+   (Outvi V on Discord: a bug report needs the text). Its controls can't,
+   as in a Mac app (HIG): buttons, tabs, menus, grips, labels. Both at no
+   specificity, so a view's own rule (a list being sorted, a blurred value)
+   still decides; a field typed into stays a field. An account's or a key's
+   name is text, though a click renames it (`.acc .rename`). */
+:where(p, pre, code, kbd, samp, dd, td, .hint, .note, .why, .err, .error, [class*="-err "], [class$="-err"], [class*="-error"], .empty-state, .sess-talk, .rt-log, .rt-steps, .rt-time) { user-select: text; -webkit-user-select: text; }
+:where(button, label, summary, select, nav, menu, [role="tab"], [role="menu"], [role="menuitem"], [role="option"], [role="switch"], [draggable="true"], .pop, .seg, .opt, .grip),
+:where(button, label, summary, select, nav, menu, [role="tab"], [role="menu"], [role="menuitem"], [role="option"], [role="switch"], [draggable="true"], .pop, .seg, .opt, .grip) * { user-select: none; -webkit-user-select: none; }
+:where(input, textarea, [contenteditable="true"], [contenteditable=""]) { user-select: text; -webkit-user-select: text; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: default; appearance: none; -webkit-appearance: none; text-align: center; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input { font: inherit; color: var(--fg); }
+.grow { flex: 1; }
+[hidden] { display: none !important; }
+code { font: var(--code-style, normal) var(--code-weight, 400) 11.5px var(--code-font, var(--code)); font-stretch: var(--code-stretch, 100%); }
+/* ---- brand icons: colour ones are images, mono ones take the text colour --- */
+/* a box of its own by default: a mask icon has no size to fall back on, and
+   one placed where nothing sizes it would otherwise not show at all */
+.ic { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 16px; height: 16px; }
+.ic img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.ic .mask { width: 100%; height: 100%; background: currentColor; -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat; }
+/* ---- header --------------------------------------------------------------- */
+.top { display: flex; align-items: center; gap: 8px; padding: 0 10px 0 14px; height: 46px; flex: none; position: relative; }
+/* 50% centres in the padding box; the 2px top padding puts the flex row a pixel lower */
+.brand { display: flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: .01em; }
+.logo svg { display: block; overflow: visible; }
+.logo { color: var(--fg); display: inline-flex; }
+/* ink, like the wordmark; the accent blue fought the text in light mode */
+.seg {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: inline-flex; padding: 2px; border-radius: 8px;
+  /* no grey track behind the tabs: only the open one's thumb */
+}
+.seg > .thumb { border-radius: 6px; background: var(--seg-thumb); box-shadow: var(--seg-edge); }
+.seg button { position: relative; z-index: 1; white-space: nowrap; height: 24px; padding: 0 12px; border-radius: 6px; font-size: 12.5px; color: var(--ctl-fg); transition: color .18s var(--ease), transform .14s var(--ease); }
+.seg button.on { color: var(--fg); }
+.seg button:hover:not(.on) { color: var(--fg-2); }
+.actions { margin-left: auto; display: flex; gap: 2px; }
+.icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--muted);
+  transition: background .12s, color .12s;
+}
+.icon:hover, .icon.on { background: var(--pill); color: var(--fg); }
+/* the icon turns on a layer of its own — painted in place, WebKit leaves
+   ghosts of each frame behind (#16) — and always finishes its turn */
+.icon svg { transform-origin: 50% 50%; backface-visibility: hidden; }
+/* a spinner turns its drawing inside the svg, round the viewBox's centre:
+   WebKit turns a whole svg on a layer snapped to the pixel grid, so off a
+   whole pixel its ring circles about a point a pixel or so off its centre */
+.icon.spin svg > * { transform-box: view-box; transform-origin: 50% 50%; animation: spin .9s linear infinite; }
+.update {
+  align-self: center; display: inline-flex; align-items: center; gap: 4px;
+  height: 22px; margin-right: 6px; padding: 0 9px 0 7px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 560; letter-spacing: .005em; white-space: nowrap;
+  color: var(--accent); background: var(--accent-soft);
+  box-shadow: inset 0 0 0 .5px color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: background .15s, color .15s, transform .12s var(--ease), opacity .15s;
+  animation: update-in .45s var(--ease);
+}
+.update:hover { background: var(--accent); color: var(--accent-fg); }
+.update:active { transform: scale(.96); }
+/* its × on the pill's corner, shown while the pointer is over it: hides
+   the pill until a newer version is out. Off the pill, just touching its
+   rounded corner: over it, the × took the top right of the pill, a fifth of
+   the round arrow in a narrow header, and a click meant for Update hid it
+   (#2291, MuiseDestiny). The pill's margin is the gap to its right. */
+.update-wrap { position: relative; align-self: center; display: inline-flex; }
+.update-hide {
+  position: absolute; top: -9px; right: -3px; width: 14px; height: 14px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--muted); background: var(--card); box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(0,0,0,.12);
+  opacity: 0; pointer-events: none; transition: opacity .12s, color .12s;
+}
+.update-wrap:hover .update-hide { opacity: 1; pointer-events: auto; }
+.update-hide:focus-visible { opacity: 1; pointer-events: auto; }
+/* its own rule: Safari before 15.4 drops a list holding it */
+.update-hide:hover { color: var(--fg); }
+.top.tight .brand > span:not(.logo), .top.tight .update span { display: none; }
+.top.tight .update { width: 22px; padding: 0; justify-content: center; margin-right: 4px; }
+.top.tight .update-hide { right: -5px; }
+.top.cramped .seg button { padding: 0 8px; }
+@keyframes update-in { from { opacity: 0; transform: translateY(-3px) scale(.94); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* ---- the sidebar (app.js layoutNav) -------------------------------------- */
+/* the sidebar has the pages down the left, in groups, the open page's own
+   tabs under it, Settings and the gateway at the foot; the same #nav that
+   is the header's tabs otherwise */
+.nav-gl, .nav-ic, .side-l, .crumb { display: none; }
+/* at any width the reader picks it (app.js layoutNav); in a narrow window
+   it gives the page more of the room */
+body.side-nav { --side-w: 212px; padding-left: var(--side-w); }
+@media (max-width: 859px) {
+body.side-nav { --side-w: 184px; }
+}
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0; z-index: 10; width: var(--side-w);
+  display: flex; flex-direction: column;
+  background: var(--bg); border-right: .5px solid var(--line);
+}
+/* its edge drags it wider or narrower, as a Mac app's sidebar's does
+   (app.js sideDrag): the reach a little either side of the line, the line
+   itself unchanged */
+.side-edge { position: absolute; top: 0; bottom: 0; right: -4px; width: 8px; z-index: 1; cursor: col-resize; touch-action: none; }
+@media (pointer: coarse) {
+.side-edge { right: -12px; width: 24px; }
+}
+.side-edge:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 4px; }
+body.side-drag, body.side-drag * { cursor: col-resize !important; user-select: none; }
+.side-top { flex: none; display: flex; align-items: center; height: 46px; padding: 0 18px; }
+.side-top .brand { font-size: 13.5px; }
+.side-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 0 10px 10px; }
+.side-foot { flex: none; max-height: 55%; overflow-y: auto; display: flex; flex-direction: column; gap: 1px; padding: 8px 10px 10px; border-top: .5px solid var(--line-2); }
+/* a short window's sidebar keeps no bar beside its pages: a thin one is laid
+   over them while they scroll and fades once they stop, as a Mac's overlay
+   scroll bar does (app.js sideBars), the same in WebKit, WebView2 and
+   WebKitGTK, whose own bars would take a gutter at rest */
+:is(.side-scroll, .side-foot) { scrollbar-width: none; }
+:is(.side-scroll, .side-foot)::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.side-bar { position: absolute; right: 4px; width: 11px; z-index: 2; opacity: 0; pointer-events: none; transition: opacity .35s ease .1s; }
+.side-bar[hidden] { display: none; }
+.side-bar > i { position: absolute; right: 2px; top: 0; width: 6px; min-height: 24px; border-radius: 3px; background: var(--muted); opacity: .55; transition: width .15s ease, opacity .15s ease; touch-action: none; }
+.side-bar:hover > i, .side-bar.drag > i { width: 8px; opacity: .75; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+.side-bar, .side-bar > i { transition: none; }
+}
+body.side-nav #nav { position: relative; left: auto; top: auto; transform: none; display: flex; flex-direction: column; gap: 1px; padding: 0; border-radius: 0; }
+body.side-nav .nav-gl { display: block; padding: 14px 8px 4px; font-size: 11px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
+body.side-nav .nav-gl:first-child { padding-top: 2px; }
+body.side-nav :is(#nav button[data-view], #prefs) {
+  display: flex; align-items: center; justify-content: flex-start; gap: 9px;
+  width: 100%; height: 30px; padding: 0 8px; border-radius: 7px;
+  font-size: 13px; color: var(--fg-2); text-align: left; white-space: nowrap;
+}
+body.side-nav :is(#nav button[data-view], #prefs) > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+body.side-nav :is(#nav button[data-view], #prefs):hover:not(.on) { background: var(--pill); color: var(--fg); }
+body.side-nav :is(#nav button[data-view], #prefs).on { background: var(--card); color: var(--fg); box-shadow: var(--seg-edge); font-weight: 500; }
+/* the open page's row: one shape that moves from row to row on a spring
+   (app.js navTopGo), the rows' own ground given up to it. As with the
+   sub-rows', a row hovered or pressed has no ground of its own, which
+   would lie over the shape as it comes */
+.nav-top-hl { display: none; }
+body.side-nav #nav > .nav-top-hl:not([hidden]) { display: block; position: absolute; z-index: 0; top: 0; left: 0; right: 0; height: 30px; border-radius: 7px; background: var(--card); box-shadow: var(--seg-edge); pointer-events: none; will-change: transform; }
+body.side-nav #side #nav.hl-on button[data-view]:is(.on, :hover, :active) { background: transparent; box-shadow: none; }
+body.side-nav #nav.hl-on button[data-view] { transition: color .22s var(--ease); }
+body.side-nav #nav.hl-on button[data-view] .nav-ic { transition: color .22s var(--ease); }
+body.side-nav .nav-ic { display: block; flex: none; color: var(--muted); }
+body.side-nav #prefs svg { flex: none; width: 15px; height: 15px; margin: 0 .5px; color: var(--muted); }
+/* graphite, as a Mac sidebar is: no colour of its own, the page open in the
+   text's own ink; the accent is kept for what acts */
+body.side-nav :is(#nav button.on .nav-ic, #prefs.on svg) { color: var(--fg); }
+body.side-nav .side-l { display: inline; }
+/* the open page's tabs, under it on a thin line */
+.nav-sub { position: relative; display: flex; flex-direction: column; gap: 1px; margin: 2px 0 6px 16px; padding-left: 8px; }
+.nav-sub::before { content: ""; position: absolute; left: 0; top: 3px; bottom: 3px; width: 1px; background: var(--line); }
+/* rows keep their size while the list unrolls or folds: squeezed, a strip
+   drawn again then (Installed gets its count) marked the selection a third
+   of a row up, over Discover (#1787) */
+.nav-sub > button { position: relative; z-index: 1; flex: none; display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 6px; font-size: 12.5px; color: var(--ctl-fg); text-align: left; white-space: nowrap; transition: color .2s var(--ease); }
+.nav-sub > button > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* the selection (.nav-hl) is the only shape in the list: a row hovered or
+   pressed has no ground of its own, which would show where the finger is
+   before the selection slides there */
+.nav-s:hover:not(.cur) { color: var(--fg); }
+.nav-s.cur { color: var(--fg); font-weight: 500; }
+/* a row pressed darkens, as a Mac sidebar's does: it never shrinks the way a
+   button does (.seg button:active, .icon:active below) */
+body.side-nav #side button:active { transform: none; }
+body.side-nav :is(#nav button[data-view], #prefs, .side-gw):active:not(.on) { background: color-mix(in srgb, var(--fg) 10%, transparent); }
+/* the selection: one shape, sliding from row to row, setting off as the row
+   is pressed (app.js navSubGlide) and most of the way there in a tenth of a
+   second, so it is under the finger, not catching up with it */
+.nav-hl { position: absolute; z-index: 0; top: 0; left: 8px; right: 0; height: 26px; border-radius: 6px; background: color-mix(in srgb, var(--fg) 6.5%, transparent); pointer-events: none; will-change: transform; transition: transform .3s cubic-bezier(.25, .9, .3, 1), height .3s cubic-bezier(.25, .9, .3, 1); }
+@media (prefers-reduced-motion: reduce) {
+.nav-hl { transition: none; }
+}
+/* beside the sidebar a page whose head holds only its tools has them in the
+   title bar, to the right of where the reader is (app.js sets the room);
+   the head's own row goes, the empty band it left with it. The bar between
+   the tools still drags the window. A page moving in only fades: a moving
+   ancestor would carry the pinned tools off the bar while it moves */
+body.side-nav .view { animation-name: fade-in; }
+body.side-nav :is(#view-library .lib-head, #view-plugins .pm-head, #view-settings .set-head) {
+  position: fixed; z-index: 11; top: 0; left: var(--tools-l, 50%); right: var(--tools-r, 64px);
+  height: var(--top-h, 46px); min-height: 0; margin: 0; padding: 0;
+  display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-end; gap: 10px;
+  pointer-events: none; --wails-draggable: drag;
+}
+body.side-nav :is(#view-library .lib-head, #view-plugins .pm-head, #view-settings .set-head) > * { pointer-events: auto; --wails-draggable: no-drag; min-width: 0; }
+body.side-nav .crumb { max-width: var(--crumb-max, none); }
+body.side-nav :is(#view-library, #view-plugins, #view-settings) { padding-top: 8px; }
+/* the gateway, under Settings: where it listens; a click opens its page */
+.side-gw { display: flex; align-items: center; gap: 8px; height: 26px; margin-top: 2px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; color: var(--muted); text-align: left; white-space: nowrap; }
+.side-gw:hover { background: var(--pill); color: var(--fg-2); }
+.side-gw > i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+.side-gw > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+/* beside the sidebar the header says where the reader is, "Work / Library /
+   MCP servers", and holds the icons; the pages' own tab strips are the
+   sidebar's now */
+body.side-nav .top, body.window.mac.side-nav .top { padding-left: 20px; }
+body.side-nav .crumb { display: flex; align-items: baseline; gap: 7px; min-width: 0; overflow: hidden; white-space: nowrap; font-size: 13.5px; }
+.crumb > span { color: var(--muted); }
+.crumb > i { font-style: normal; color: var(--faint); }
+.crumb > b { font-weight: 600; color: var(--fg); overflow: hidden; text-overflow: ellipsis; }
+body.side-nav :is(#usageTab, #view-library .lib-tabs, #view-plugins .lib-tabs, #setTabs) { display: none !important; }
+/* the sidebar's button (app.js toggleSideNav), in the title bar where a Mac
+   app has it: the drawing's left pane filled while the sidebar shows */
+.side-toggle { flex: none; }
+.side-toggle .st-pane { fill: currentColor; opacity: .32; transition: opacity .3s var(--ease); }
+body:not(.side-nav) .side-toggle .st-pane { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+.side-toggle .st-pane { transition: none; }
+}
+/* the two layouts trade places as one motion (app.js navMorph): the sidebar
+   slides in from the window's edge or back to it, each page's tab flies to
+   its place in the other, and the page moves over, together. Each piece is
+   drawn at its own size, never stretched, the old fading as the new comes
+   in. It sets off from rest and settles, as a Mac's sidebar does (its
+   ease-in-ease-out) in a third of a second: the frames a webview drops
+   as the pictures start to move fall where hardly anything moves yet. On
+   the spring the lists open on it left at speed, a twelfth of the way gone
+   in the first frame, and a dropped one there (WebView2's, most) read as a
+   jerk, then crept for a quarter second more (wangye1644294 on X) */
+:root { --morph-t: .32s; --morph-ease: cubic-bezier(.42, 0, .58, 1); }
+::view-transition-group(*) { z-index: 1; animation-duration: var(--morph-t); animation-timing-function: var(--morph-ease); }
+::view-transition-old(*), ::view-transition-new(*) { inline-size: auto; block-size: auto; }
+/* the sidebar's own panel under the tabs flying to it or from it, with the
+   rest of the window (a fixed panel is drawn last otherwise, over them) */
+::view-transition-group(root), ::view-transition-group(side) { z-index: 0; }
+/* the page slides as one, the new layout of it, its edge on the sidebar's:
+   two of it fading over each other would print every line twice */
+::view-transition-old(page) { display: none; }
+::view-transition-new(page) { animation: none; }
+/* the icons at the header's right stay against it */
+::view-transition-old(actions), ::view-transition-new(actions) { inset-inline-start: auto; inset-inline-end: 0; }
+::view-transition-old(side):only-child { animation: side-out var(--morph-t) var(--morph-ease) both; }
+::view-transition-new(side):only-child { animation: side-in var(--morph-t) var(--morph-ease) both; }
+@keyframes side-in { from { transform: translateX(-100%); } }
+@keyframes side-out { to { transform: translateX(-100%); } }
+/* ---- lists ---------------------------------------------------------------- */
+.view { flex: 1; min-height: 0; overflow-y: auto; padding: 0 12px 4px; display: flex; flex-direction: column; animation: view-in .24s var(--ease); }
+@keyframes view-in { from { opacity: 0; transform: translateY(5px); } }
+@media (prefers-reduced-motion: reduce) {
+.view { animation-name: fade-in; }
+}
+body.window .view { padding: 2px 16px 8px; }
+/* every page keeps to a width the eye can follow across, centred in a
+   maximized window, rather than its name at one edge and its switch at the
+   other (#860); Routing, Usage and Sessions too, so a large screen doesn't
+   stretch them alone edge to edge while the others sit in the middle (面条 on
+   Discord): their tables and charts lay out by the room they get */
+body.window :is(#view-agents, #view-sessions, #view-providers, #view-routing, #view-gateway, #view-usage, #view-library, #view-plugins, #view-settings) { padding-left: max(16px, calc(50% - 600px)); padding-right: max(16px, calc(50% - 600px)); }
+/* a view takes focus (tabIndex -1) only so the keys scroll it after a click;
+   a ring round the whole list there marks nothing a reader can act on (#1601) */
+.view:focus { outline: none; }
+/* Windows and Linux draw a classic scrollbar, arrows and all; a thin rounded
+   thumb instead, like the overlay one macOS shows (left as it is there) */
+:where(body:not(.mac)) ::-webkit-scrollbar { width: 10px; height: 10px; background: transparent; }
+:where(body:not(.mac)) ::-webkit-scrollbar-thumb { background: var(--faint); border: 3px solid transparent; border-radius: 10px; background-clip: padding-box; }
+:where(body:not(.mac)) ::-webkit-scrollbar-thumb:hover { background-color: var(--muted); }
+:where(body:not(.mac)) ::-webkit-scrollbar-button, :where(body:not(.mac)) ::-webkit-scrollbar-corner { display: none; background: transparent; }
+/* Usage and Routing keep their bar's room too, whether the page runs past
+   the window or not. Their square-celled grids (the year heatmap, Sessions'
+   calendar, the context waffle) grow taller as they grow wider, so near the
+   window's height WebKit could lay the page out at the full width under the
+   bar and, on each redraw (Requests' 5s refresh), 8px narrower for a few
+   frames: the head's refresh, interval and cost shook sideways with Today
+   picked (@LingYi_Stu on X). The other pages have no such grid and keep the
+   8px while short */
+body.window :is(#view-usage, #view-routing) { overflow-y: scroll; }
+.list { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; flex: none; }
+.row { display: flex; align-items: center; gap: 9px; min-height: 40px; padding: 5px 9px 5px 11px; }
+body.window .row { min-height: 48px; padding: 7px 12px 7px 14px; gap: 12px; }
+.row + .row, .editor + .row, .row + .editor { border-top: 1px solid var(--line-2); }
+/* Settings' agent-pref link box sits between two rows, empty but for a search:
+   the row after it, and its own first row, still get their line (the owner, 10-22) */
+#agentPrefLinks + .row, .row + #agentPrefLinks > .row:first-child { border-top: 1px solid var(--line-2); }
+.row .ic { width: 18px; height: 18px; }
+body.window .row .ic { width: 22px; height: 22px; }
+.row .name { font-weight: 500; letter-spacing: -.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.row .who { min-width: 0; flex: 1 1 auto; }
+.row .sub { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+/* the last row of the list: the agents nothing is set on, folded away */
+.agent-more { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; border: 0; border-top: 1px solid var(--line-2); background: none; font: inherit; font-size: 12px; color: var(--muted); padding: 9px; cursor: pointer; transition: color .2s, background-color .2s; }
+.agent-more:hover { color: var(--fg); background: var(--card-2); }
+.agent-more span { display: inline-flex; }
+.agent-more .chev { transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.agent-more[aria-expanded="true"] .chev { transform: rotate(180deg); }
+/* the folded agents unroll like a scroll: the height opens on a long ease-out,
+   each row settles in a beat after the one above, and the unrolling edge is
+   soft while it moves. Rolling up is quicker, bottom row first. */
+.agent-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.4, 0, .2, 1); }
+.agent-fold.open { grid-template-rows: 1fr; transition-duration: .62s; transition-timing-function: cubic-bezier(.22, 1, .36, 1); }
+.agent-fold-inner { min-height: 0; overflow: hidden; }
+.agent-fold.moving .agent-fold-inner { -webkit-mask-image: linear-gradient(#000 calc(100% - 32px), transparent); mask-image: linear-gradient(#000 calc(100% - 32px), transparent); }
+.agent-fold .row { opacity: 0; transform: translateY(-10px) scale(.985); transform-origin: 50% 0; transition: opacity .22s ease, transform .32s cubic-bezier(.4, 0, .2, 1); transition-delay: calc((var(--n) - 1 - var(--i)) * 22ms); }
+.agent-fold.open .row { opacity: 1; transform: none; transition: opacity .42s ease, transform .56s cubic-bezier(.22, 1, .36, 1); transition-delay: calc(70ms + var(--i) * 48ms); }
+/* the logo is the row's handle: drag it to move the row, and a click opens
+   the row's menu (Move up, Move down, Hide). It stays the logo under the
+   pointer; the grip that says the row can be taken hold of is in its margin. */
+.ag-handle { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; margin: -3px; padding: 0; border: 0; border-radius: 6px; background: none; color: inherit; cursor: grab; touch-action: none; transition: background-color .15s; }
+body.window .ag-handle { width: 28px; height: 28px; }
+.ag-handle > .ic { grid-area: 1 / 1; transition: opacity .15s; }
+.ag-handle:hover, .ag-handle.open { background: var(--pill); }
+.ag-handle:focus-visible { background: var(--pill); outline: 1.5px solid var(--fg-2); outline-offset: 0; }
+.agent-fold .ag-handle { cursor: default; }
+/* a row in the list carries a grip in its left margin, drawn only while the
+   row is under the pointer, dragged, or its handle has the keyboard or its
+   menu open: always there it is clutter (the owner: 一直出现太丑了), as on
+   the Providers list. It is the handle's own, so a drag or a click on it does
+   what the logo does, and it takes no room from the row; the logo stays the
+   logo. Hide is in the handle's menu and the row's right-click menu. */
+#agents > .row .ag-handle { position: relative; }
+#agents > .row .ag-handle::before { content: ""; position: absolute; left: -7px; top: 50%; width: 6px; height: 11px; margin-top: -5.5px; background: radial-gradient(circle, var(--muted) .9px, transparent 1.2px) 0 0 / 3px 3.75px; opacity: 0; transition: opacity .15s; }
+#agents > .row:is(:hover, .dragging) .ag-handle::before, #agents > .row .ag-handle.open::before { opacity: 1; }
+#agents > .row .ag-handle:focus-visible::before { opacity: 1; }
+/* the agent's CLI on its name's line (#202): its version faint, and a quiet
+   pill that updates it when a newer one is out — the row keeps its height */
+body.window .row.agent .who { display: flex; align-items: center; gap: 7px; container-type: inline-size; }
+/* the name is the last to give way: where the row is tight the update
+   pill keeps only its arrow, then the version goes, and only then is the
+   name cut (it was "C." beside a full pill at the window's first width) */
+body.window .row.agent .who .name { flex: 0 0 auto; max-width: 100%; }
+body.window .row.agent .who .ag-cli { flex: 0 1 auto; overflow: hidden; }
+.ag-cli { display: inline-flex; align-items: center; gap: 6px; flex: none; min-width: 0; }
+.ag-cli:empty { display: none; }
+/* the line over each kind of folded agent: hidden by hand, or nothing set */
+.agent-fold-cap { padding: 8px 11px 2px; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .02em; border-top: 1px solid var(--line-2); }
+body.window .agent-fold-cap { padding: 10px 14px 3px; }
+.agent-fold-cap + .row { border-top: 0; }
+.agent-fold .agent-fold-cap { opacity: 0; transition: opacity .22s ease; }
+.agent-fold.open .agent-fold-cap { opacity: 1; transition: opacity .42s ease; transition-delay: calc(70ms + var(--i) * 48ms); }
+/* a provider on is moved as an agent is (#499): its logo is the handle,
+   the grip in its margin drawn only with the pointer on the row */
+#providers > .row .pv-handle { position: relative; }
+#providers > .row .pv-handle::before { content: ""; position: absolute; left: -7px; top: 50%; width: 6px; height: 11px; margin-top: -5.5px; background: radial-gradient(circle, var(--muted) .9px, transparent 1.2px) 0 0 / 3px 3.75px; opacity: 0; transition: opacity .15s; }
+/* apart: Safari before 15.4 drops a whole selector list with :focus-visible in it */
+#providers > .row .pv-handle:focus-visible::before { opacity: 1; }
+.pop.row-menu { width: auto; min-width: 176px; max-height: none; overflow-y: auto; overscroll-behavior: contain; padding: 4px; border: 1px solid var(--line); display: grid; gap: 1px; }
+.row-menu .rm-item { display: flex; align-items: center; gap: 8px; width: 100%; height: 28px; padding: 0 8px; border: 0; border-radius: 7px; background: none; color: var(--fg); font: inherit; font-size: 12.5px; text-align: left; cursor: default; outline: none; }
+.row-menu .rm-item svg { flex: none; color: var(--muted); }
+.row-menu .rm-item:not(:disabled):is(:hover, :focus) { background: var(--pill); }
+.row-menu .rm-name { flex: 1; }
+.row-menu .rm-key { margin-left: 14px; font-size: 11px; color: var(--faint); }
+.row-menu .rm-sep { height: 1px; margin: 3px 6px; background: var(--line-2); }
+/* two columns: the model, then the smaller setting; single controls sit at the end.
+   Fixed widths keep every chevron on the same vertical line down the list. */
+.agent .who { flex: 1 1 auto; }
+.field {
+  display: inline-flex; align-items: center; gap: 5px;
+  max-width: 100%; min-width: 0;
+  height: 25px; padding: 0 5px 0 8px;
+  border-radius: 6px;
+  background: var(--pill);
+  font-size: 12.5px;
+  transition: background .12s, box-shadow .12s;
+}
+/* a field that follows the model unless set: a square in a third column */
+#agents { --extras: 1; --extras-w: calc(var(--extras) * 29px - 5px); }
+/* When a window is narrow (or zoomed in), the fixed-width setting columns
+   leave too little room for the agent names. Put them on the next line. */
+@media (max-width: 600px) {
+body.window .row.agent { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 12px; row-gap: 3px; }
+body.window .row.agent > .ag-handle { grid-column: 1; grid-row: 1; }
+body.window .row.agent > .who { grid-column: 2; grid-row: 1; width: 100%; }
+body.window .row.agent > .ag-conn { grid-column: 2; grid-row: 1; justify-self: end; margin-left: 0; }
+}
+.field:hover, .field.open { background: var(--pill-hover); }
+.field.open { box-shadow: inset 0 0 0 1px var(--accent); }
+.field .k { color: var(--faint); font-size: 11.5px; flex: none; }
+.field .v { min-width: 0; flex: 0 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; font-weight: 500; }
+.field .chev { color: var(--faint); display: inline-flex; margin-left: auto; padding-left: 1px; }
+.field:hover .chev, .field.open .chev { color: var(--muted); }
+.field.flash, .subscription-card.flash, .pq-card.flash, .row.pref.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { 0%, 35% { box-shadow: inset 0 0 0 1px var(--green); background: var(--green-soft); } 100% {} }
+/* ---- usage ---------------------------------------------------------------- */
+.usage-head { display: flex; align-items: center; gap: 10px; height: 34px; margin: 4px 0 6px; flex: none; }
+/* the tabs sit on the head's middle line with the refresh beside them, not
+   at its top as .segs elsewhere do */
+.usage-head > .segs { align-self: center; }
+.usage-head > .ctx-range { display: flex; align-self: center; }
+.subscription-usage { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; gap: 7px; margin-bottom: 8px; flex: none; }
+/* packed into columns (packUsage): each card as tall as itself, placed on
+   rows a pixel high, the gap between cards in its place on them (#860) */
+.subscription-usage.packed { grid-auto-rows: 1px; row-gap: 0; }
+.subscription-card { padding: 10px 12px 11px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); min-width: 0; }
+.subscription-head { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; }
+.subscription-head .ic { width: 17px; height: 17px; }
+.subscription-head b { font-size: 12.5px; font-weight: 600; }
+.subscription-account { display: flex; align-items: baseline; gap: 7px; margin: 0 0 6px; font-size: 11px; color: var(--fg-2); }
+.subscription-account .user { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quota-windows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 14px; }
+/* each window takes two of the grid's rows, its names and its bar, so
+   when one's count wraps under its name the bars beside it still line up;
+   its one column is the window's width, which a long count would
+   otherwise stretch past the card's edge */
+.quota-windows .quota { display: grid; grid-row: span 3; grid-template-rows: subgrid; grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+.quota-windows .quota-track { align-self: start; }
+/* a narrow card puts the count under the window's name rather than
+   squeezing the name a character a line and the count past the edge;
+   side by side they are at either end, and a count on a line of its own
+   starts at the left, under the name */
+.quota-labels { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 6px; margin-bottom: 4px; font-size: 10.5px; color: var(--muted); }
+.quota-labels > span { white-space: nowrap; }
+.quota-labels .quota-n { max-width: 100%; padding: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; color: var(--fg-2); font-size: inherit; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.quota-labels .quota-n:hover { color: var(--fg); }
+.quota-labels .quota-n > span { white-space: nowrap; }
+/* stacked, a count too long for the window's width breaks at its ·; its
+   parts are laid out as flex items, as WebKit leaves the space between two
+   nowrap spans out when it checks a line fits and then cuts the line with
+   the ellipsis ("剩余 100…" for 100 / 100 积分 · 剩余 100%) */
+.quota-windows.stacked .quota-n { flex-basis: 100%; display: flex; flex-wrap: wrap; column-gap: 4px; white-space: normal; }
+.quota-windows.stacked .quota-n > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* stacked, a window's name wider than its column goes on to a second
+   line rather than running under the window beside it (ZCode's "ZCode
+   1024 Dev Day · GLM-5.3" in the panel, rtbeilin on X); cut short, two
+   windows of one plan would read alike */
+.quota-windows.stacked .quota-name { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+.quota-reset { display: flex; flex-wrap: wrap; column-gap: 4px; margin-top: 4px; font-size: 10px; color: var(--faint); font-variant-numeric: tabular-nums; }
+/* each part of the reset line goes whole onto a line of its own when it
+   doesn't fit beside the others, and only one wider than the card breaks
+   between its words rather than running off it (#2443: German's
+   "Zurückgesetzt 19. Okt. 02:37 ·" at 560px) */
+.quota-reset > span { white-space: normal; min-width: 0; }
+.quota-track { height: 4px; border-radius: 2px; background: var(--pill); overflow: hidden; }
+.quota-track i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.quota-balance { display: flex; align-items: baseline; gap: 6px; font-size: 10.5px; color: var(--muted); }
+/* Hide accounts' eye by an account's name: that one shown while the rest
+   stay hidden, for this window (yogurt36); in sight on hover or focus, and
+   while it shows its account */
+.acct-eye { display: none; flex: none; align-self: center; padding: 2px; border-radius: 4px; color: var(--muted); line-height: 0; opacity: 0; }
+.acct-eye:hover { color: var(--fg); background: var(--pill-hover); }
+.quota-balance b { margin-left: auto; font-size: 15px; color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+/* a balance field's several amounts (#420): a line each, the label quiet
+   at the left and the figure at the right, the first the larger; a
+   percent's meter under its line; when it was read under them all */
+.quota-balance { flex-wrap: wrap; }
+/* how many it couldn't price stays, at every width: a sum never reads as
+   if those cost nothing (#1856) */
+@media (max-width: 640px) {
+.usage-head { gap: 7px; }
+/* and the refresh's picker is its figure alone; where the tabs, the periods and
+     these are more than a line, the sum goes on a line of its own, at the right */
+.usage-head { flex-wrap: wrap; height: auto; min-height: 34px; row-gap: 2px; }
+.usage-refresh { margin-right: 0; }
+.usage-refresh .icon { width: 22px; }
+.usage-refresh .sess-pick { padding: 0 7px; }
+.usage-refresh .sess-pick svg { display: none; }
+}
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; flex: none; }
+.kpi { background: var(--card); padding: 12px 14px 11px; display: flex; flex-direction: column; min-width: 0; }
+.kpi b { font-size: 20px; font-weight: 600; letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi span { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.kpi small { font-size: 11px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the Overview's tokens tile names how they are counted, a pop-up of the two
+   ways (#2378): the label's own look, a small chevron after it */
+.kpi .kpi-pick { align-self: flex-start; display: inline-flex; align-items: center; gap: 3px; max-width: 100%; margin: 2px 0 -1px -4px; padding: 1px 4px; border-radius: 5px; color: var(--muted); transition: background .12s, color .12s; }
+.kpi .kpi-pick > span { margin-top: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kpi .kpi-pick svg { flex: none; }
+.kpi .kpi-pick:hover, .kpi .kpi-pick.open { background: var(--pill); color: var(--fg-2); }
+.kpi .kpi-pick:hover > span, .kpi .kpi-pick.open > span { color: inherit; }
+.chart { position: relative; margin-top: 8px; padding: 12px 14px 8px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; flex: none; }
+.chart .peak { font-size: 10.5px; color: var(--faint); font-variant-numeric: tabular-nums; text-align: right; margin: 0 0 5px; }
+.chart .bars { display: flex; align-items: flex-end; gap: 3px; height: 72px; border-bottom: 1px solid var(--line-2); }
+.chart .bar { flex: 1 1 0; min-width: 2px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; border-radius: 3px 3px 0 0; overflow: hidden; }
+.chart .bar:hover { background: var(--pill); }
+.chart .bar i { display: block; background: var(--accent); }
+.chart .bar i.in { opacity: .38; }
+.chart .labels { display: flex; gap: 3px; margin-top: 5px; font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.chart .labels span { flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: visible; }
+/* the last label can be wider than its bar's column: let it spill left, not off the card */
+.chart .labels span:last-child { display: flex; justify-content: flex-end; }
+.row.stat .who { flex: 0 0 180px; }
+.row.stat .share { flex: 1 1 auto; height: 4px; border-radius: 2px; background: var(--pill); overflow: hidden; margin: 0 6px; }
+.row.stat .share i { display: block; height: 100%; border-radius: 2px; background: var(--accent); opacity: .7; }
+.row.stat .num { display: flex; flex-direction: column; align-items: flex-end; flex: none; min-width: 64px; font-variant-numeric: tabular-nums; }
+.row.stat .num b { font-weight: 600; }
+.row.stat .num small { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+/* an Agents row's actions: shown as the row is hovered, as a Finder row's are,
+   and always where nothing hovers */
+.row.stat .us-more { flex: none; width: 22px; height: 22px; opacity: 0; transition: opacity .12s, background .12s, color .12s; }
+/* where a pointer hovers it takes no room: its margins give back its width
+   and the gap before it, so the row at rest is laid out as it was, and it
+   shows over the end of the share bar, on the card's own colour */
+@media (hover: hover) {
+.row.stat .us-more { position: relative; margin: 0 -9px 0 -22px; background: var(--card); }
+.row.stat .us-more:hover { background: var(--pill); }
+}
+.row.stat:hover .us-more { opacity: 1; }
+.row.stat .us-more:focus-visible { opacity: 1; }
+@media (hover: none) {
+.row.stat .us-more { opacity: 1; margin: 0 -4px 0 -2px; }
+}
+/* the action's room comes out of the name's, which ends in "…" */
+.row.stat.acts .who { flex-shrink: 1; }
+.usage-note { padding: 10px 4px 2px; font-size: 11px; color: var(--faint); user-select: text; -webkit-user-select: text; }
+.usage-pane { display: flex; flex-direction: column; flex: none; }
+/* a line in parts wraps between them, each kept whole; only a part wider
+   than its card on its own is cut (#2378: "缓存 879…") */
+.led-strip .sub.parts, .kpi small.parts { white-space: normal; }
+.led-strip .sub.parts > span, .kpi small.parts > span { display: inline-block; max-width: 100%; vertical-align: bottom; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* not the tile's label: .kpi span is its small capitals */
+.kpi small.parts > span { margin-top: 0; font: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
+.sess-filter { width: 220px; max-width: 100%; height: 26px; padding: 0 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: 12px; outline: none; }
+.sess-filter:focus { border-color: var(--accent); }
+.sess-pick { flex: none; display: inline-flex; align-items: center; gap: 4px; max-width: 180px; height: 26px; padding: 0 7px 0 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); color: var(--muted); font: inherit; font-size: 12px; cursor: default; }
+.sess-pick span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sess-pick svg { flex: none; opacity: .7; transition: transform .15s var(--ease); }
+.sess-pick:hover { background: var(--pill); }
+@media (max-width: 560px) {
+.sess-filter { width: 150px; }
+}
+#addSheet { scroll-margin-top: 12px; }
+/* ---- the panel's profiles: Profiles at the Agents tab's foot, left, opens
+   them over the list, upward from it ------------------------------------------ */
+.prof-btn { display: inline-flex; align-items: center; gap: 4px; margin-left: -7px; }
+.prof-btn em { font-style: normal; color: var(--faint); font-variant-numeric: tabular-nums; }
+.pq-age { font-size: 12px; color: var(--muted); white-space: nowrap; }
+/* ---- profiles ------------------------------------------------------------- */
+.profiles { display: flex; align-items: center; gap: 10px; padding: 10px 4px 2px; min-height: 36px; flex: none; }
+.profiles .label { flex: none; }
+.profiles .chips { flex: 1 1 0; min-width: 0; padding: 0; min-height: 0; }
+.profiles #save { margin-left: auto; flex: none; }
+/* switching profile is what the panel is opened for: a target to hit, not a tag */
+.profiles .chips { gap: 8px; }
+.profiles .chip { height: 30px; padding: 0 6px 0 13px; font-size: 13px; }
+.profiles .chip .x { width: 20px; height: 20px; font-size: 13px; }
+.row-head { display: flex; align-items: center; height: 26px; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.text { font-size: 12px; color: var(--ctl-fg); padding: 3px 7px; border-radius: 6px; transition: background .12s, color .12s; white-space: nowrap; }
+.text:hover { color: var(--fg); background: var(--pill); }
+.text.primary { color: var(--accent-fg); background: var(--accent); font-weight: 500; }
+.text.primary:hover { filter: brightness(1.08); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0 6px; min-height: 12px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 2px;
+  height: 25px; padding: 0 5px 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 12px;
+  transition: border-color .12s, background .12s, color .12s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.chip .x { width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; line-height: 1; opacity: 0; transition: opacity .12s; }
+.chip:hover .x { opacity: .6; }
+.chip .x:hover { opacity: 1; background: rgba(127, 127, 127, .2); }
+/* a profile's details: what it holds, by agent, and its Apply (#467) */
+.profiles .chip.on { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+/* ---- footer --------------------------------------------------------------- */
+.foot { display: flex; align-items: center; gap: 2px; padding: 0 8px 6px 14px; min-height: 28px; flex: none; }
+body.window .foot { padding-left: 18px; }
+.status { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity .3s; }
+.status.ok { color: var(--green); }
+.status.err { color: var(--red); }
+.status.warn { color: var(--amber); }
+/* an outcome (Refresh, Test models…) stands out from the corner it is in:
+   a solid pill in its colour, over a window the desktop shows through;
+   it fits the footer's 22px, so its coming doesn't make the page above
+   it shorter and move it */
+.status.ok, .status.err, .status.warn { font-size: 12.5px; line-height: 16px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, currentColor 16%, var(--bg)); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 30%, transparent); }
+.status.lift { position: fixed; z-index: 21; font-size: 12.5px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, currentColor 16%, var(--card)); left: 50%; bottom: 18px; transform: translateX(-50%); max-width: calc(100vw - 32px); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 30%, transparent), 0 6px 20px rgba(0, 0, 0, .28); animation: fade-in .2s var(--ease); }
+/* ---- picker popover ------------------------------------------------------- */
+.pop {
+  position: fixed; z-index: 30; /* above the modal (20): a picker opened from the provider editor must show over it */
+  width: 320px; max-height: 340px;
+  display: flex; flex-direction: column;
+  background: var(--pop-bg);
+  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+  border-radius: 11px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  /* it grows out of the button it drops from (--ox, its middle), quick to
+     answer and a long soft settle with no bounce, the way iOS's menus come;
+     it shows at once and fades out ahead of its motion on the way out */
+  transform-origin: var(--ox, 24px) top;
+  animation: pop-fade .18s ease-out, pop-in .42s cubic-bezier(.16, 1, .3, 1);
+}
+.pop.up { transform-origin: var(--ox, 24px) bottom; --pop-dy: 6px; }
+@keyframes pop-fade { from { opacity: 0; } }
+@keyframes pop-in { from { transform: translateY(var(--pop-dy, -6px)) scale(.94); } }
+/* a closed picker's likeness going: it sinks back toward the button */
+.pop.leaving { pointer-events: none; animation: pop-out .22s cubic-bezier(.4, 0, .7, .2) forwards; }
+@keyframes pop-out { to { opacity: 0; transform: translateY(calc(var(--pop-dy, -6px) * .6)) scale(.96); } }
+@media (prefers-reduced-motion: reduce) {
+.pop { animation: pop-fade .12s ease-out; }
+.pop.leaving { animation: none; }
+}
+.pop .search { display: flex; align-items: center; gap: 8px; padding: 0 12px; border-bottom: 1px solid var(--line-2); color: var(--faint); }
+.pop input { flex: 1; background: none; border: 0; outline: none; height: 36px; font-size: 13px; }
+.pop input::placeholder { color: var(--faint); }
+.picker-body { display: flex; min-height: 0; flex: 1 1 auto; }
+#pickerRail[hidden] { display: none; }
+#pickerRail { position: relative; width: 43px; padding: 6px 5px; border-right: 1px solid var(--line-2); display: flex; flex-direction: column; align-items: center; gap: 3px; flex: none; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+/* it draws its own thumb (.rail-thumb) */
+#pickerRail::-webkit-scrollbar { width: 0; height: 0; }
+.rail-thumb { position: absolute; z-index: 0; top: 0; left: 5px; width: 31px; height: 31px; border-radius: 8px; opacity: 0; background: var(--sel); box-shadow: inset 0 0 0 1px var(--line-2), 0 1px 2px rgba(0, 0, 0, .06); pointer-events: none; transition: transform 260ms cubic-bezier(.22, 1, .36, 1), opacity 100ms ease-out; will-change: transform; }
+.rail-item { position: relative; z-index: 1; width: 31px; height: 31px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); flex: none; transition: color 150ms ease-out, transform 150ms cubic-bezier(.25, 1, .5, 1); }
+.rail-item:hover { color: var(--fg); background: color-mix(in srgb, var(--pill) 68%, transparent); }
+.rail-item:active { transform: scale(.94); }
+.rail-item.on { color: var(--fg); background: transparent; }
+.rail-item .ic { width: 16px; height: 16px; transition: transform 220ms cubic-bezier(.22, 1, .36, 1); }
+/* a rail icon's name, drawn beside it (renderPickerRail's showRailTip) */
+.rail-tip { position: fixed; z-index: 31; top: 0; left: 0; transform: translate(-3px, -50%); padding: 3px 8px; border-radius: 6px; background: var(--fg); color: var(--bg); font-size: 11.5px; font-weight: 500; line-height: 16px; white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; pointer-events: none; opacity: 0; visibility: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, .18); transition: opacity 90ms ease-out, transform 140ms cubic-bezier(.22, 1, .36, 1), visibility 0s 90ms; }
+.rail-tip.left { transform: translate(3px, -50%); }
+.rail-tip.on { opacity: 1; visibility: visible; transform: translate(0, -50%); transition: opacity 90ms ease-out, transform 140ms cubic-bezier(.22, 1, .36, 1); }
+@media (prefers-reduced-motion: reduce) {
+.rail-tip, .rail-tip.on { transition: none; }
+}
+.rail-sep { width: 24px; height: 1px; margin: 2px 0; background: var(--line-2); flex: none; }
+.pop ul { list-style: none; overflow-y: auto; padding: 5px; min-width: 0; flex: 1 1 auto; contain: paint; }
+.pop li {
+  display: flex; align-items: center; gap: 9px;
+  height: 30px; padding: 0 8px; border-radius: 7px;
+  white-space: nowrap; font-size: 12.5px;
+}
+.pop li .ic { width: 16px; height: 16px; }
+.pop li .option-words { display: flex; align-items: center; min-width: 0; flex: 1 1 auto; gap: 9px; }
+.pop li .v { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.pop li .n { flex: 1 1 0; min-width: 0; font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+.pop li .favorite { display: none; align-items: center; justify-content: center; color: var(--faint); width: 24px; height: 24px; border-radius: 6px; flex: none; }
+.pop li:hover .favorite, .pop li .favorite.on { display: inline-flex; }
+.pop li .favorite:hover { color: var(--amber); background: var(--pill-hover); }
+.pop li .favorite.on { color: var(--amber); }
+/* not a favourite: an outline star, on hover; a favourite: a filled one, always */
+.pop li .favorite.on path { fill: currentColor; }
+.pop.model-picker { max-height: 420px; border: 1px solid var(--line); }
+.pop.model-picker .search { min-height: 39px; }
+.pop.model-picker .search input { height: 38px; }
+.pop.model-picker li:not(.group) { height: 34px; padding: 0 8px; }
+.pop.model-picker li .option-words { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 9px; }
+.pop.model-picker li .v { max-width: 62%; font-size: 12.5px; line-height: 18px; flex: 0 1 auto; }
+.pop.model-picker li .n { width: auto; flex: 1 1 0; font-size: 10.5px; line-height: 18px; }
+.pop.model-picker li.group { height: 24px; padding-top: 7px; }
+.pop li.sel { background: var(--sel); }
+.pop li .check { color: var(--accent); display: none; margin-left: auto; flex: none; }
+.pop li.cur .check { display: inline-flex; }
+.pop li.group { height: 22px; padding: 6px 8px 0; font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); pointer-events: none; }
+.pop li.group:not(:first-child) { margin-top: 2px; }
+#view-gateway .row-head, #view-usage .row-head { margin: 14px 0 6px; padding: 0 2px; }
+#view-usage .row-head.quota-head { margin: 6px 0 6px; }
+/* Providers' search (#1614): a toolbar field over the list, at its right
+   edge as Settings' is; across the page when the window is narrow. While
+   searching, the Turned off fold stays open on the ones that match. */
+#view-providers .pv-head { display: flex; justify-content: flex-end; margin: 0 0 10px; flex: none; }
+#view-providers .pv-q { flex: 0 1 220px; min-width: 120px; }
+@media (max-width: 520px) {
+#view-providers .pv-q { flex: 1 1 100%; }
+}
+/* the Models head folds the list away: a chevron, the label, how many */
+.fold { display: inline-flex; align-items: center; gap: 5px; margin-left: -4px; padding: 3px 6px 3px 4px; border-radius: 6px; color: var(--faint); transition: background .12s, color .12s; }
+.fold:hover { background: var(--pill); color: var(--muted); }
+.fold svg { flex: none; transform: rotate(90deg); transition: transform .15s ease-out; }
+/* Change key (#1869) looks like the copy button beside it, but isn't one */
+.copy, .key-edit { width: 22px; height: 22px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); flex: none; transition: background .12s, color .12s; }
+.copy:hover, .key-edit:hover { background: var(--pill-hover); color: var(--fg); }
+/* ---- providers page ------------------------------------------------------- */
+.provider .chev { color: var(--faint); display: inline-flex; transition: transform .15s; }
+/* a provider row: logo, name, the agents on it, key status */
+.provider .who { flex: 1 1 auto; }
+.provider .pswitch { margin-left: 8px; }
+.uses { display: flex; align-items: center; gap: 4px; margin-left: auto; flex: none; }
+.key { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border-radius: 6px; font: var(--code-style, normal) var(--code-weight, 400) 11px var(--code-font, var(--code)); font-stretch: var(--code-stretch, 100%); color: var(--muted); white-space: nowrap; flex: none; margin-left: 4px; width: 128px; overflow: hidden; font-variant-numeric: tabular-nums; }
+.key::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
+.key > span { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+/* Usage's days of the reader's own (#1492): the periods' last opt, and the
+   menu it opens, a few spans and a month of days */
+.range-opt { display: inline-flex; align-items: center; gap: 5px; }
+.range-opt svg { flex: none; }
+@media (max-width: 640px) {
+.range-opt:not(.on) > span { display: none; }
+}
+.after-list { display: flex; align-items: center; gap: 8px; padding: 8px 4px 0; flex: none; }
+/* the Providers page's add button stays at the view's foot over a long list;
+   its fade reaches 12px past each side from a ::before, the bar's own box
+   in the content box (a negative margin-end was sideways scroll in macOS
+   15's WebKit: see .lib-head, #1236) */
+#view-providers .after-list { position: sticky; bottom: -8px; z-index: 2; margin: 0 0 -8px; padding: 14px 4px 12px; transition: opacity .18s ease, visibility 0s; }
+#view-providers .after-list::before { content: ""; position: absolute; z-index: -1; inset: 0 -12px; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--bg) 12px); }
+/* the add sheet: presets as tiles, one key away */
+.sheet { padding: 6px 0 8px; flex: none; }
+.sheet .row-head { padding: 0 2px; gap: 6px; }
+.sheet .find, #view-gateway .find { height: 24px; width: 160px; padding: 0 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); font-size: 12px; outline: none; transition: border-color .12s; }
+.sheet .find:focus, #view-gateway .find:focus { border-color: var(--accent); }
+.sheet .find::placeholder, #view-gateway .find::placeholder { color: var(--faint); }
+.sheet .kind { display: flex; align-items: baseline; gap: 8px; padding: 22px 8px 6px; font-size: 12px; }
+.sheet .kind b { font-size: 13px; font-weight: 600; color: var(--fg); }
+.sheet .kind span { color: var(--faint); }
+.sheet .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1px 12px; }
+/* a row of the add sheet: an icon and a name, no frame; a row already
+   added has a small green dot after its name rather than fading */
+.tile {
+  display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 8px;
+  border-radius: 8px; text-align: left; min-width: 0; transition: background .12s;
+}
+.tile:hover { background: var(--pill); }
+.tile .ic { width: 18px; height: 18px; flex: none; }
+.tile .nm { flex: 1; min-width: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.tile .n { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tile .have { flex: none; width: 6px; height: 6px; border-radius: 3px; background: var(--green); }
+.sheet .custom-foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 2px 0; border-top: 1px solid var(--line-2); }
+.sheet .custom-foot .custom { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 10px 0 6px; border-radius: 8px; color: var(--accent); font-size: 13px; }
+.sheet .custom-foot .custom:hover, .sheet .custom-foot .custom.on { background: var(--accent-soft); }
+.sheet .custom-foot .hint { font-size: 12px; color: var(--muted); }
+/* the provider editor, in a dialog */
+.editor { padding: 16px 18px 14px; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px 14px; align-items: start; }
+.editor .ehead { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; padding-bottom: 8px; margin-bottom: 2px; border-bottom: 1px solid var(--line-2); }
+.editor .ehead .ic { width: 20px; height: 20px; }
+.editor .ehead b { font-weight: 600; }
+.editor label { font-size: 12px; color: var(--fg-2); text-align: right; padding-top: 5px; }
+.editor .hint { font-size: 11px; color: var(--fg-2); margin-top: 4px; }
+/* a provider's own proxy (#237): the address beside the options, its room
+   kept while it is hidden so a pick never changes the dialog's height */
+.editor .proxy-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.editor .proxy-row .proxy-mode { flex: none; }
+.editor .proxy-row input.proxy-url { flex: 1 1 auto; width: auto; min-width: 0; }
+.editor .proxy-row input.proxy-url.off { visibility: hidden; }
+.editor :is(input.concurrency, input.queue-limit, input.queue-wait)[type] { width: 12em; max-width: 100%; }
+.editor input[type="number"] { -moz-appearance: textfield; }
+.editor input[type="number"]::-webkit-inner-spin-button, .editor input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.editor input[type="text"], .editor input[type="password"], .editor input[type="url"], .editor input[type="number"], .acc .kf input, .acc input.rename-in {
+  height: 27px; padding: 0 9px; border-radius: 7px;
+  border: 1px solid var(--line); background: var(--card);
+  font-size: 12.5px; outline: none; width: 100%; min-width: 0;
+  transition: border-color .12s, box-shadow .12s;
+}
+.editor input:focus, .editor .headers textarea.json:focus, .editor .extra-body textarea.json:focus, .acc input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); outline: none; }
+.editor input::placeholder, .acc input::placeholder { color: var(--faint); }
+.editor .pair { display: flex; gap: 8px; align-items: center; }
+.editor .pair input:first-child { flex: 1; }
+.editor .side { display: flex; gap: 4px; align-items: center; flex: none; min-width: 52px; justify-content: flex-end; }
+.editor .side .text { padding: 3px 6px; }
+.editor .stack { display: flex; flex-direction: column; gap: 6px; }
+.editor .headers { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.editor .headers .hadds { display: flex; flex-wrap: wrap; gap: 2px 12px; }
+.editor .headers textarea.json, .editor .extra-body textarea.json { width: 100%; box-sizing: border-box; padding: 7px 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); color: var(--fg); outline: none; font-family: var(--code-font, var(--code)); font-size: 12px; line-height: 1.5; resize: vertical; tab-size: 2; white-space: pre; overflow: auto; transition: border-color .12s, box-shadow .12s; }
+/* a provider's extra body fields (#1604): the JSON, and why it can't be saved */
+.editor .extra-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.editor .extra-body .why { font-size: 12px; line-height: 1.45; color: var(--red); overflow-wrap: anywhere; }
+.editor .extra-body .why:empty { display: none; }
+.segs { position: relative; display: inline-flex; padding: 2px; border-radius: 7px; background: var(--pill); align-self: flex-start; }
+.opt { position: relative; z-index: 1; white-space: nowrap; height: 22px; padding: 0 10px; border-radius: 5px; font-size: 12px; color: var(--muted); transition: color .18s var(--ease), transform .14s var(--ease); }
+.opt.on { color: var(--fg); }
+.opt:hover:not(.on) { color: var(--fg-2); }
+.thumb {
+  position: absolute; top: 2px; bottom: 2px; left: 0; width: 0; border-radius: 6px;
+  background: var(--card); box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .06);
+  transition: opacity .15s; /* the glide is slide()'s, which only it starts */
+  pointer-events: none;
+}
+.segs .thumb { border-radius: 5px; }
+.editor .more { grid-column: 1 / -1; }
+.editor .more summary { font-size: 12px; color: var(--muted); list-style: none; display: inline-flex; align-items: center; gap: 4px; padding: 2px 0; margin-left: 86px; }
+.editor .more summary::-webkit-details-marker { display: none; }
+.editor .more summary::before { content: "▸"; font-size: 10px; color: var(--faint); display: inline-block; transition: transform .42s cubic-bezier(.32, .72, 0, 1); }
+@media (prefers-reduced-motion: reduce) {
+.editor .more summary::before { transition: none; }
+}
+.editor .more summary:hover { color: var(--fg); }
+/* its labels are longer (Anthropic 地址, Responses-URL): their column takes
+   the longest, on one line, rather than wrap a last 址 under it (#875) */
+.editor .more .inner { display: grid; grid-template-columns: minmax(72px, max-content) minmax(0, 1fr); gap: 10px 14px; align-items: start; padding-top: 8px; }
+.editor .more .inner label { white-space: nowrap; }
+.editor .bar { grid-column: 1 / -1; display: flex; align-items: center; gap: 4px; padding-top: 10px; border-top: 1px solid var(--line-2); margin-top: 2px; }
+/* endpoints, each with its own test result */
+.eps { display: flex; flex-direction: column; gap: 3px; }
+.ep { display: flex; align-items: center; gap: 8px; height: 24px; min-width: 0; }
+.ep .pl { flex: none; width: 64px; font-size: 11.5px; color: var(--muted); }
+.ep code { color: var(--fg-2); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; user-select: text; -webkit-user-select: text; cursor: text; }
+.res { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px; border-radius: 5px; font-size: 11px; font-variant-numeric: tabular-nums; background: var(--pill); color: var(--muted); }
+.res:empty { display: none; }
+/* ---------- settings ---------- */
+#view-settings .row-head { margin: 4px 0 6px; padding: 0 2px; }
+#view-settings .row-head + .list { margin-bottom: 8px; }
+/* the warm-ups and check-in: a tab per service where a heading would be,
+   in the headings' small capitals, the one picked darker on a soft pill,
+   the picked one's card alone under them */
+.warm-tabs { display: flex; align-items: center; gap: 2px; margin-left: -7px; }
+.warm-tabs button { height: 22px; padding: 0 7px; border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); transition: color .12s, background-color .12s; }
+.warm-tabs button:hover:not(.on) { color: var(--fg-2); }
+.warm-tabs button.on { color: var(--fg); background: var(--pill); }
+/* the page's parts (#471): a tab each at the top in the same look, a line
+   more when they don't fit across (a narrow window, a larger text size),
+   the part picked alone under them */
+#view-settings .set-head { height: auto; min-height: 26px; flex: none; }
+.set-tabs { flex-wrap: wrap; row-gap: 2px; min-width: 0; }
+.set-tabs button { flex: none; white-space: nowrap; }
+.set-page { flex: none; }
+.set-page[hidden] { display: none; }
+/* Settings' search: the box at the end of the tabs, on a line of its own
+   when they fill it; while it holds words, each part's rows that say them
+   under the part's name, and the tabs set aside */
+#view-settings .set-head { flex-wrap: wrap; gap: 6px; }
+/* with the tabs across the top (the sidebar has them in the title bar) the
+   parts' tabs and the search stay at the top of the page while a long part
+   (About) scrolls under them, on the frosted strip the Library's and the
+   Plugins' tabs have (.lib-head), a hairline once something is beneath
+   (#2396). The strip is the head's ::before, reaching over the view's
+   padding and the head's margins so no row shows through above or below
+   it; at the page's top it is the page's own colour, nothing moved. The
+   window's view is padded 2px at the top: the head stops over it */
+body:not(.side-nav) #view-settings .set-head { position: sticky; top: 0; z-index: 5; --bleed-l: 12px; --bleed-r: 12px; }
+body.window:not(.side-nav) #view-settings .set-head { top: -2px; --bleed-l: 16px; --bleed-r: 16px; }
+body:not(.side-nav) #view-settings .set-head::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: -6px; bottom: -6px; left: calc(-1 * var(--bleed-l)); right: calc(-1 * var(--bleed-r));
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter: saturate(1.6) blur(16px); backdrop-filter: saturate(1.6) blur(16px);
+  box-shadow: 0 1px 0 transparent; transition: box-shadow .18s var(--ease);
+}
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+body:not(.side-nav) #view-settings .set-head::before { background: var(--bg); }
+}
+.set-q { flex: 0 1 180px; margin-left: auto; min-width: 120px; }
+.set-searching .set-tabs { display: none; }
+.set-searching .set-q { flex: 1 1 100%; width: 100%; margin-left: 0; }
+.set-searching .set-page::before { content: attr(data-part); display: block; margin: 4px 2px 6px; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.set-none { margin: 18px 2px; font-size: 13px; color: var(--muted); text-align: center; }
+.set-page > .list:not(:last-child) { margin-bottom: 8px; }
+/* one space above and below every row's content, a row with a line under its
+   name too: the window's 7px for every row made those read cramped beside the
+   one-line rows, which min-height centred (the owner, 10-22) */
+.row.pref, body.window .row.pref { min-height: 48px; padding: 12px 12px 12px 14px; gap: 14px; }
+.row.pref .who { flex: 1 1 auto; }
+/* a setting's line under its name is read whole, wrapped beside the control
+   it explains: one line cut with an ellipsis hid what the setting does
+   (arculongus on Discord, 10-25) */
+.row.pref .sub { margin-top: 2px; color: var(--fg-2); white-space: normal; overflow-wrap: anywhere; }
+.session-terminal-select, .pref-pick { max-width: min(230px, 45%); height: 26px; color: var(--fg); }
+.session-terminal-select:focus-visible, .pref-pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.row.pref .segs { flex: none; margin-left: auto; }
+.proxy-segs { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin-left: auto; min-width: 0; max-width: 100%; }
+.proxy-controls, .proxy-auth { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; min-width: 0; max-width: 100%; }
+.proxy-segs input.proxy, .proxy-segs input.proxy-credential, input.words { width: 180px; max-width: 100%; min-width: 0; height: 27px; padding: 0 9px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); font-size: 12.5px; outline: none; transition: border-color .12s, box-shadow .12s; }
+.proxy-segs input:focus, input.words:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.proxy-segs input::placeholder, input.words::placeholder { color: var(--faint); }
+input.words { width: 240px; max-width: 100%; }
+/* the masking rules' add row: its words in full, then on a line of their
+   own a name, prefix or regex, the match taking the room left, Add */
+.row.pref.rule-row { flex-wrap: wrap; row-gap: 8px; }
+.row.pref.rule-row .who { flex: 1 1 100%; }
+.row.pref.rule-row .sub { white-space: normal; }
+.prefs .val.rule-add { flex: 1 1 100%; max-width: none; margin-left: 0; gap: 6px; }
+input.words.rule-match { flex: 1 1 auto; width: auto; min-width: 0; }
+@media (max-width: 520px) {
+.proxy-segs { flex-wrap: wrap; justify-content: flex-end; }
+}
+.prefs .val { display: inline-flex; align-items: center; gap: 2px; margin-left: auto; min-width: 0; max-width: 60%; flex: none; }
+.prefs .val .text { padding: 3px 6px; }
+/* ---------- motion ----------
+   One easing everywhere (iOS-ish: quick start, soft landing), short
+   durations, small distances. Pressing gives a little, pages settle in,
+   dialogs lift. */
+:root { --ease: cubic-bezier(.2, .8, .2, 1); }
+.text, .icon, .tile, .achip, .mchip, .use, .link {
+  transition-property: background, background-color, color, border-color, box-shadow, filter, opacity, transform;
+  transition-duration: .16s; transition-timing-function: var(--ease);
+}
+.text:active, .tile:active, .achip:active, .mchip:active, .use:active, .opt:active, .seg button:active { transform: scale(.96); }
+.icon:active { transform: scale(.9); }
+.row.provider { transition: background .16s var(--ease); }
+.row.provider:active { background: var(--card-2); }
+.chips .chip { transition: background .16s var(--ease), color .16s var(--ease), transform .14s var(--ease); }
+.chips .chip:active { transform: scale(.96); }
+.status { transition: opacity .2s var(--ease); }
+.status.err, .status.warn { user-select: text; -webkit-user-select: text; cursor: text; }
+.action-confirm { --confirm-fill: #c73535; --confirm-fg: #ffffff; position: fixed; inset: 0; margin: auto; max-height: calc(100vh - 32px); overflow-y: auto; width: min(420px, calc(100vw - 32px)); padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--fg); box-shadow: 0 24px 60px rgba(0, 0, 0, .32); font: inherit; }
+.action-confirm .text.danger-fill { background: var(--confirm-fill); color: var(--confirm-fg); }
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) .action-confirm { --confirm-fill: var(--red); --confirm-fg: #14142a; }
+}
+.action-confirm::backdrop { background: rgba(0, 0, 0, .32); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.action-confirm h2 { margin: 0 0 12px; font-size: 16px; overflow-wrap: anywhere; }
+.action-confirm p { margin: 0 0 20px; color: var(--fg-2); line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
+.action-confirm .bar { display: flex; align-items: center; gap: 10px; margin: 0; }
+@media (pointer: coarse) {
+.action-confirm button { min-height: 44px; min-width: 44px; }
+}
+/* ---------- modal ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: center; padding: 28px 24px;
+  background: rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1); backdrop-filter: blur(8px) saturate(1.1);
+}
+/* opening and closing are animated from app.js (openModal, closeModal) */
+.modal.out { pointer-events: none; }
+/* open, it holds its place from a top app.js gives it (holdModal) */
+.modal.held { align-items: flex-start; }
+.modal .dialog { position: relative; }
+.modal .dialog {
+  width: min(600px, 100%); min-width: 0; max-height: 100%; overflow-y: auto;
+  border-radius: 14px; background: var(--card);
+  box-shadow: 0 0 0 1px var(--line), 0 24px 60px rgba(0, 0, 0, .32), 0 2px 8px rgba(0, 0, 0, .12);
+}
+/* In a dialog the editor's head and buttons stay put and only the fields
+   between them scroll; both bars are the same height, their contents
+   centred in it. */
+.modal .dialog { display: flex; flex-direction: column; }
+.modal .editor.framed { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; min-height: 0; overflow: hidden; }
+.modal .editor.framed > .ebody {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; grid-template-columns: inherit; gap: 10px 14px; align-items: start; padding: 14px 18px;
+}
+.modal .editor.framed > .ehead, .modal .editor.framed > .bar { flex: none; min-height: 48px; margin: 0; padding: 0 18px; }
+.modal .editor.framed > .ehead { border-bottom: 1px solid var(--line-2); }
+.modal .editor.framed > .bar { border-top: 1px solid var(--line-2); }
+body.window .modal { padding: 16px 24px 24px; }
+@keyframes fade-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+/* what declares no transition of its own keeps none: its default is
+     `all 0s`, which the rule above made `all .01ms`, so a header tab's
+     label took a frame to come to its new size, the header was fitted to
+     the old one, and the page stayed a few pixels wider than the window
+     (#2142, #1864, #2023). No specificity: any transition declared wins. */
+:where(*), :where(*)::before, :where(*)::after { transition-property: none; }
+}
+#view-providers .after-list { flex-wrap: wrap; }
+.editor label.tick { display: flex; align-items: center; gap: 7px; text-align: left; padding-top: 0; color: var(--fg-2); cursor: pointer; }
+.editor label.tick input { margin: 0; }
+/* the usual context windows under the field, one click each (#120) */
+.cxpicks { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.cxpick {
+  height: 22px; padding: 0 9px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  font-size: 11.5px; font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: border-color .12s, background .12s, color .12s;
+}
+.cxpick:hover { border-color: var(--accent); color: var(--accent); }
+/* the Usage page's cards, dragged by their logos: a grip by the logo on hover.
+   A grip's box holds both its columns of dots whole, 3px apart: at 5px wide
+   with 3.5px between them the right column was cut in half (Hu9956, #842).
+   It stands 4px inside the card's border, as the Agents row's does inside
+   its list's: at -8px, with the card's 12px padding, it stood on the border
+   (real-jacket, #1581) */
+.subscription-head .us-handle { position: relative; width: 24px; height: 24px; margin: -4px -3px; }
+.subscription-head .us-handle::before { content: ""; position: absolute; left: -5px; top: 50%; width: 6px; height: 11px; margin-top: -5.5px; background: radial-gradient(circle, var(--muted) .9px, transparent 1.2px) 0 0 / 3px 3.75px; opacity: 0; transition: opacity .15s; }
+/* apart: Safari before 15.4 drops a whole selector list with :focus-visible in it */
+.us-handle:focus-visible::before { opacity: 1; }
+/* Safari before 16.2 (macOS 12's, #220) has no color-mix(): a declaration
+   with one is dropped, and where nothing else is under it the page would go
+   clear. The panel's paint (which tintPanel hands the system), and the
+   floating status, take a plain colour there instead. */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+.status.ok, .status.err, .status.warn { background: var(--bg); }
+.status.lift { background: var(--card); }
+}
+/* how often the Usage page reads its numbers again, and a way to read them now */
+.usage-refresh { display: inline-flex; align-items: center; gap: 2px; margin-right: 10px; }
+.usage-refresh .icon { width: 24px; height: 24px; }
+.usage-refresh .sess-pick { height: 24px; }
+/* ---- an agent's model list ------------------------------------------------ */
+/* the line under an agent's name: quiet words, a pill only on hover */
+body.window .row.agent .who.with-models { flex-wrap: wrap; row-gap: 0; }
+/* the rows drawn again under the line said beneath each name had WebKit's
+   scroll anchoring move the list a few px before the page was held back
+   (claude-direct.test.cjs); the page holds the reader itself */
+#view-agents { overflow-anchor: none; }
+body.window .row.agent > .ag-conn { margin-left: 12px; align-self: center; cursor: pointer; }
+.ag-lead { margin: 0 2px 12px; font-size: 12.5px; color: var(--fg-2); }
+.ag-lead b { font-weight: 600; color: var(--fg); }
+/* the first line keeps its place opened: a line of its own height, the
+   row not centring what it holds; no gap between its lines, which the
+   opened part couldn't fold away: it starts where the shut row ended */
+body.window .row.agent.conn { flex-wrap: wrap; min-height: 56px; align-content: flex-start; row-gap: 0; }
+body.window .row.agent.conn > .who { min-height: 42px; align-content: center; }
+body.window .row + .row.agent.conn > .who { min-height: 41px; }
+/* the line above it is in the 56px */
+.ag-st { flex: 0 0 100%; min-width: 0; display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 18px; color: var(--muted); }
+.ag-st .ag-st-t { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag-st.why { align-items: flex-start; }
+.ag-st.why .ag-st-t { white-space: normal; overflow-wrap: anywhere; }
+.ag-st.why .ag-dot { margin-top: 6px; }
+.ag-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--faint); }
+.ag-st.on .ag-dot { background: var(--green); }
+.ag-link, .ag-quiet { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border: 0; border-radius: 6px; background: none; color: var(--fg-2); font: inherit; font-size: 12px; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s; }
+.ag-link:hover, .ag-quiet:hover, .ag-link.open { background: var(--pill); color: var(--fg); }
+.ag-link .chev, .ag-quiet .chev { display: inline-flex; color: var(--faint); transition: transform .2s ease; }
+.ag-link:focus-visible, .ag-quiet:focus-visible, .ag-add:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 1px; }
+.row.agent.conn > .ag-link { margin-left: auto; }
+.row.agent.conn > .ag-conn { margin-left: 4px; align-self: center; cursor: pointer; }
+.row.agent.conn > .who + .ag-conn, .row.agent.conn > .who + .ag-add, .row.agent.conn > .who + .ag-cant { margin-left: auto; }
+/* the model it starts on, beside the switch: one width down the list, so
+   the pickers and the switches line up */
+.row.agent.conn > .field.ag-start { flex: none; width: 196px; margin-left: 8px; align-self: center; justify-content: flex-start; }
+.row.agent.conn > .who + .field.ag-start { margin-left: auto; }
+.row.agent.conn > .field.ag-start .v { flex: 1; text-align: left; }
+.row.agent.conn > .field.ag-start .chev { margin-left: auto; }
+.row.agent.conn > .field.ag-start + .ag-conn { margin-left: 10px; }
+.ag-cant { flex: none; font-size: 12px; color: var(--faint); }
+.row.agent.conn.unplugged .ag-handle .ic { opacity: .7; }
+@media (max-width: 600px) {
+body.window .row.agent.conn { display: flex; }
+/* the name beside its logo; the link and the switch wrap under it when short of room */
+body.window .row.agent.conn > .who { width: auto; flex: 1 1 160px; min-width: 0; }
+/* short of room, the model it starts on takes a line of its own under
+     the name, the link and the switch staying beside it */
+.row.agent.conn > .field.ag-start, .row.agent.conn > .who + .field.ag-start { order: 1; flex: 1 1 100%; width: auto; margin: 9px 0 0 34px; }
+}
+/* Checkboxes are drawn as the app's own, not the system's (ARNO on
+   Discord: the Sessions page's white boxes stood out in dark mode); a
+   page's own margins stay. */
+input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 14px; height: 14px; flex: none;
+  display: inline-grid; place-content: center; vertical-align: middle;
+  border: 1px solid var(--faint); border-radius: 4px;
+  background: var(--card); color: var(--accent-fg);
+}
+input[type="checkbox"]:hover:not(:disabled) { border-color: var(--muted); }
+input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate { background: var(--accent); border-color: var(--accent); }
+input[type="checkbox"]::before {
+  content: ""; width: 10px; height: 10px; background: currentColor; transform: scale(0);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2L8 3' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2L8 3' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+input[type="checkbox"]:indeterminate::before { transform: scale(1); -webkit-mask: none; mask: none; width: 8px; height: 1.6px; border-radius: 1px; }
+input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.editor .pair .side .key-count { white-space: nowrap; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+/* Agent visibility manager: selection stays separate from connection controls. */
+.ag-manage-bar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(max-content, 1fr); align-items: center; gap: 6px; padding: 3px 8px; border-top: 1px solid var(--line-2); }
+.ag-manage-bar > .agent-more { grid-column: 2; min-width: 0; border: 0; border-radius: 6px; padding: 6px; }
+.ag-manage-bar > .agent-more > span:first-child { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ag-manage-bar .chev { flex: none; }
+.ag-manage-button { grid-column: 3; justify-self: end; display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; border: 0; border-radius: 6px; background: none; color: var(--muted); font: inherit; font-size: 12px; white-space: nowrap; transition: color .2s, background-color .2s; }
+.ag-manage-button:hover { color: var(--fg); background: var(--card-2); }
+.ag-manage-button:focus-visible { color: var(--fg); background: var(--card-2); outline: 2px solid var(--accent); outline-offset: -2px; }
+/* Settings' search finds them; not searching, the links stay out */
+#view-settings:not(.set-searching) #agentPrefLinks { display: none; }
+/* ===== plugins/routing/routing.css ===== */
+/* Routing, live: the Gateway view's stage for what routing does with each
+   request (client.js). The same stage as the site's Model Routing, only
+   played by the gateway's own trace. */
+.rt { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 12px; margin: 0 0 18px; }
+.rt-top { display: flex; flex-direction: column; gap: 3px; }
+.rt-what { font-size: 13px; color: var(--muted); }
+.rt-what b { color: var(--fg); font-weight: 600; }
+.rt-mode { margin: 0; font-size: 12.5px; color: var(--fg-2); line-height: 1.45; }
+.rt-stage { position: relative; display: grid; grid-template-columns: 124px 124px minmax(0, 1fr); column-gap: 56px; align-items: center; padding: 22px 2px; }
+.rt-wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.rt-wires path { fill: none; stroke: var(--line); stroke-width: 1.5; transition: opacity .3s; }
+/* lit: the way the request shown went, over; only a request in flight flows (#2386) */
+.rt-wires path.lit { stroke: var(--agent, var(--muted)); }
+.rt-flows { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; will-change: transform; }
+.rt-sky { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.rt-srcs { position: relative; z-index: 1; min-width: 0; display: grid; gap: 10px; }
+.rt-src b::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 6px 1px 0; border-radius: 50%; background: var(--agent); vertical-align: middle; }
+.rt-node { position: relative; z-index: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px 10px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-align: center; }
+.rt-node .rt-ic .ic, .rt-node .rt-bird { width: 26px; height: 26px; margin-bottom: 3px; }
+.rt-node .rt-ic .ic img, .rt-node .rt-ic .ic svg { width: 26px; height: 26px; }
+.rt-node b { font-size: 13px; font-weight: 600; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rt-node small { font-size: 11px; color: var(--muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rt-hub { border-color: var(--fg); box-shadow: 0 0 0 4px var(--card-2); }
+.rt-hub i { font-style: normal; font-size: 10.5px; font-weight: 560; margin-top: 5px; padding: 1px 8px; border-radius: 999px; background: var(--fg); color: var(--card); }
+.rt-accts { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; min-width: 0; }
+.rt-accts li { position: relative; display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; column-gap: 10px; row-gap: 6px; padding: 9px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; transition: opacity .3s, border-color .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+.rt-accts li { margin-left: calc(var(--depth, 0) * 18px); }
+.rt-accts li:not(.hit) { content-visibility: auto; contain-intrinsic-size: auto var(--rt-row, 38px); }
+.rt-accts b { font-weight: 560; color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rt-accts b > span:not(.ic) { font-weight: 450; color: var(--muted); }
+.rt-accts b > span.who { color: var(--fg); font-weight: 560; }
+.rt-accts b .ic { display: inline-flex; width: 16px; height: 16px; margin-right: 7px; vertical-align: -3px; }
+.rt-accts b code.mdl, .rt-req code, .rt-act code.mdl { font: var(--code-style, normal) 500 11px/1.5 var(--code-font, var(--code)); font-stretch: var(--code-stretch, 100%); color: var(--fg-2); background: var(--card-2); border-radius: 5px; padding: 0 5px; }
+.rt-accts b code.mdl { margin-left: 7px; font-weight: 450; }
+.rt-accts em { font-style: normal; font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rt-accts .bar { grid-column: 2 / 4; height: 3px; border-radius: 2px; background: var(--card-2); overflow: hidden; }
+.rt-accts .bar i { display: block; height: 100%; width: 0; border-radius: 2px; background: var(--muted); transition: width .4s; }
+.rt-accts li.nobar .bar { display: none; }
+.rt-accts .dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--muted); }
+.rt-accts li.on { border-color: var(--fg); }
+.rt-accts li.on em { color: var(--fg); }
+.rt-accts li.on .bar i { background: var(--fg); }
+.rt-accts li.on .dot { background: var(--fg); border-color: var(--fg); }
+.rt-accts .tag { position: absolute; right: 10px; top: -10px; padding: 1px 7px; border-radius: 6px; background: var(--red); color: #fff; font: var(--code-style, normal) 600 10.5px/1.5 var(--code-font, var(--code)); font-stretch: var(--code-stretch, 100%); opacity: 0; transform: translateY(4px) scale(.9); transition: opacity .25s, transform .25s; pointer-events: none; }
+.rt-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid var(--line); }
+.rt-cap { flex: 1 1 20em; margin: 0; min-height: 3em; display: flex; align-items: center; font-size: 13px; line-height: 1.45; color: var(--fg); }
+.rt-cap.in { animation: rtin .4s ease-out; }
+@keyframes rtin { from { opacity: 0; transform: translateY(4px); } }
+.rt-stats { display: flex; gap: 18px; font-size: 11px; color: var(--muted); }
+.rt-stats > span { display: flex; flex-direction: column; }
+.rt-stats b { font-size: 19px; line-height: 1.2; font-weight: 650; letter-spacing: -.02em; color: var(--fg); font-variant-numeric: tabular-nums; }
+.rt-log { padding-top: 10px; margin-top: 10px; border-top: 1px solid var(--line); }
+.rt-log-head { display: flex; flex-wrap: wrap; align-items: center; row-gap: 2px; font-size: 12px; font-weight: 600; color: var(--fg); }
+.rt-log-head .grow { flex: 1; }
+.rt-steps { list-style: none; margin: 6px 0 0; padding: 0; display: grid; align-content: start; gap: 5px; counter-reset: rt; }
+.rt-steps li { position: relative; padding-left: 20px; font-size: 12.5px; line-height: 1.45; color: var(--fg-2); }
+.rt-steps li::before { content: ""; position: absolute; left: 5px; top: .5em; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.rt-steps li.why { color: var(--fg); }
+.rt-steps li.why::before { background: var(--fg); }
+.rt-steps li.ok::before { background: var(--green); }
+@media (prefers-reduced-motion: reduce) {
+.rt-accts li.now .dot, .rt-wires path.live, .rt-flows path, .rt-sky .pkt.held, .rt-accts li.new, .rt-accts li.hit, .rt-hub.tick, .rt-src.tick, .rt-cap.in, .rt-steps li.wait::before, .masking .pii { animation: none; }
+.rt-accts li { transition: none; }
+}
+/* a narrow list: what a row says goes under its name */
+.rt-accts:where(.max460) li { grid-template-columns: 10px minmax(0, 1fr); }
+.rt-accts:where(.max460) em { grid-column: 2; white-space: normal; }
+.rt-accts:where(.max460) .bar { grid-column: 2; }
+:where(.rt.max560) .rt-stage { grid-template-columns: 1fr 1fr; column-gap: 28px; row-gap: 26px; padding: 16px 0; }
+:where(.rt.max560) .rt-accts { grid-column: 1 / -1; padding-left: 22px; }
+.rt-accts:where(.max560) li { grid-template-columns: 10px minmax(0, 1fr); }
+.rt-accts:where(.max560) em { grid-column: 2; white-space: normal; }
+.rt-accts:where(.max560) .bar { grid-column: 2; }
+:where(.rt.max560) .rt-stats { gap: 14px; }
+/* the Routing view */
+#view-routing .row-head { margin: 14px 0 6px; padding: 0 2px; gap: 0; }
+#view-routing .row-head .note { font-size: 11px; color: var(--faint); margin-left: 8px; }
+#view-routing .row-head .rt-livedot + .note { margin-left: 8px; }
+.rt-mask, .rt-newgroup, .rt-gogroups { display: inline-flex; align-items: center; gap: 5px; }
+.rt-mask svg, .rt-newgroup svg, .rt-gogroups svg { width: 13px; height: 13px; flex: none; }
+/* the routing groups, far below with many models: the head goes to them */
+.rt-gogroups { margin-right: 6px; flex: none; }
+.rt-gsec:focus { outline: none; }
+/* the routing groups' New group, at the top too: the groups sit below the
+   requests, out of sight on a first look (#944) */
+.rt-newgroup { margin-right: 6px; }
+.rt-gnew { display: inline-flex; align-items: center; gap: 4px; }
+#view-routing .rt { margin: 0; }
+.rt-more { padding-bottom: 12px; }
+.rt-cols { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 16px; }
+/* side by side, the accounts end where the requests do and scroll like
+   them, not run on down the page beside an empty column: of no height of
+   their own, they take what the requests give the row, and no less than a
+   few accounts'. Only where the requests' column still keeps each request
+   on one line (wider than 760px, see below): narrower, one column of
+   one-line requests reads better than two with each request on three
+   (#860, huoranxuanyuan). Where the page is 1150px wide or more. Kept to
+   28%, no more than 360px: in a page kept to 1200px the accounts had room
+   to spare while the requests' models were cut (#1926, hibaliqya-yonma) */
+:where(.rt-more.min1150) .rt-cols { grid-template-columns: minmax(0, 1fr) clamp(260px, 28%, 360px); }
+:where(.rt-more.min1150) .rt-cols:not(.solo) .rt-col:last-child { display: flex; flex-direction: column; }
+:where(.rt-more.min1150) .rt-cols:not(.solo) .rt-acts { flex: 1 1 auto; height: 0; min-height: 216px; overflow-y: auto; overscroll-behavior: contain; }
+/* each column sized by its own width: a request's row lays itself out by
+   the list's width, not the page's (#273: in two columns of ~470px the
+   rows kept to one line, and the reasoning was drawn over the numbers) */
+.rt-col { min-width: 0; }
+/* the model that answered keeps room of its own (at least 14em, or 30%
+   of a narrower list) and the metrics wrap in theirs, up to 40%: an auto
+   column took the widest row's metrics for every row, and the model went
+   to "· hi…" (#1926, hibaliqya-yonma) */
+.rt-reqs { padding: 4px; max-height: 420px; overflow-y: auto; display: grid; grid-template-columns: auto fit-content(32%) minmax(min(14em, 30%), 1fr) fit-content(40%); }
+.rt-req { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: center; column-gap: 12px; padding: 6px 8px; font: inherit; font-size: 12px; text-align: left; color: var(--fg-2); background: none; border: 1px solid transparent; border-radius: 8px; cursor: pointer; }
+.rt-req:hover { background: var(--card-2); }
+.rt-req[aria-pressed="true"] { background: var(--card-2); border-color: var(--line); color: var(--fg); }
+.rt-req .at { font-variant-numeric: tabular-nums; color: var(--muted); }
+.rt-req .asked { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.rt-req .asked i.ag { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--agent); }
+.rt-req .asked .ic, .rt-req .asked .ic img, .rt-req .asked .ic svg { width: 14px; height: 14px; flex: none; }
+.rt-req .m, .rt-req .to span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* the waiting dot's 6px glow fits inside the clip: 6px on its left,
+   1px more above and below, given back outside so nothing moves
+   (#2553, dumplings) */
+.rt-req .to { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; color: var(--fg); padding: 1px 0 1px 6px; margin: -1px 0 -1px -6px; }
+.rt-req .to .said { flex-shrink: 100000; min-width: min(9em, 60%); }
+.rt-req .to .said.split { display: flex; }
+.rt-req .to .said .who { flex: 0 1000 auto; min-width: 2.5em; }
+.rt-req .to .said .mdl { flex: none; max-width: calc(100% - 2.5em); white-space: pre; }
+/* on a phone the account keeps a few letters, not a sliver of one (40px,
+   where phone-rows.test.cjs calls a text cut to a sliver) */
+@media (max-width: 600px) {
+.rt-req .to .said .who { min-width: 40px; }
+.rt-req .to .said .mdl { max-width: calc(100% - 40px); }
+}
+.rt-req .to i { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.rt-steps li .rt-named { white-space: nowrap; }
+.rt-steps li .rt-named > .ic { width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; }
+.rt-req .meta { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: 2px 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rt-metric { display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; min-width: 0; }
+.rt-metric .k { color: var(--muted); }
+.rt-metric .v { font-variant-numeric: tabular-nums; }
+.rt-req .tokens, .rt-session .rt-token-total { cursor: help; }
+.rt-req .meta > * + .rt-metric::before { content: "·"; margin: 0 2px; }
+.rt-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; }
+.rt-group-by { flex: none; }
+/* Purpose is a list tool in its heading; the bar below chooses day and view. */
+#view-routing .rt-req-head { height: auto; min-height: 26px; flex-wrap: wrap; }
+.rt-metric-pick { display: inline-flex; align-items: center; gap: 3px; height: 24px; margin-left: 6px; }
+#view-routing :where(.rt-col.max440) .rt-req-head .note { flex: 1 1 100%; order: 1; margin: 2px 0 0; }
+:where(.rt-col.max760) .rt-reqs { grid-template-columns: auto minmax(0, 1fr); }
+:where(.rt-col.max760) .rt-req { row-gap: 2px; }
+:where(.rt-col.max760) .rt-req .asked { grid-column: 2; grid-row: 1; }
+:where(.rt-col.max760) .rt-req .to { grid-column: 2; grid-row: 2; }
+:where(.rt-col.max760) .rt-req .meta { grid-column: 2; grid-row: 3; justify-content: flex-start; }
+.rt-acts { padding: 4px 0; }
+.rt-prov { display: flex; align-items: center; gap: 7px; padding: 8px 12px 4px; font-size: 12px; }
+.rt-prov .ic, .rt-prov .ic img, .rt-prov .ic svg { width: 14px; height: 14px; }
+.rt-prov:not(:first-child) { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 10px; }
+/* a routing named where it can be changed: a way to where it is set */
+.rt-go { cursor: pointer; }
+.rt-go::after { content: " ›"; }
+.rt-hub i.rt-go:hover { box-shadow: 0 0 0 3px var(--card-2), 0 0 0 4px var(--fg); }
+.rt-hub i.rt-go:focus-visible { box-shadow: 0 0 0 3px var(--card-2), 0 0 0 4px var(--fg); }
+.rt-go:focus-visible { outline: none; }
+.rt-act { display: grid; gap: 3px; padding: 6px 12px 6px 33px; font-size: 12px; }
+.rt-act .nm { display: flex; gap: 6px; min-width: 0; }
+.rt-act .nm b { font-weight: 560; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rt-act .st { color: var(--fg-2); }
+.rt-act .st:empty { display: none; }
+.rt-act .tally { display: flex; flex-wrap: wrap; gap: 2px 12px; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.rt-livedot { width: 6px; height: 6px; margin-left: 7px; border-radius: 50%; background: var(--green); --fg: var(--green); }
+@media (prefers-reduced-motion: reduce) {
+.rt-livedot { animation: none; }
+}
+/* routing groups, and the providers routing over several of their own */
+.rt-gsec { display: grid; gap: 6px; margin-top: 16px; }
+.rt-gsec .row-head .note { margin-right: 6px; }
+/* the groups filtered by name and model, beside Select and New group */
+.rt-gsec .rt-gfilter { width: 190px; min-width: 0; flex: 0 1 190px; height: 24px; margin: 0 6px 0 4px; }
+.rt-groups > *, .rt-pools > * { border-top: 1px solid var(--line-2); }
+.rt-groups > :first-child, .rt-pools > :first-child { border-top: 0; }
+.rt-group { display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 14px; cursor: pointer; transition: background .12s; }
+.rt-group:hover { background: var(--card-2); }
+.rt-group .rt-gon { flex: none; transform: scale(.85); }
+.rt-group .ics { display: flex; gap: 3px; flex: none; min-width: 18px; }
+.rt-group .ics .ic { width: 16px; height: 16px; }
+/* a group's logos are its handle (#779), as an agent row's logo is: the
+   grip in the row's left margin is drawn only while the row is under the
+   pointer, dragged, or its handle has the keyboard or its menu open —
+   always there it is clutter, as on the Agents page. .ag-handle is in the
+   selector so it outweighs body.window .ag-handle, whose 28px held a stack
+   of logos in, spilling it over the card's left edge onto the name (ARNO
+   on Discord) */
+.rt-group .rt-ghandle.ag-handle { position: relative; align-items: center; justify-content: center; width: auto; min-width: 24px; height: 24px; padding: 0 3px; }
+.rt-group .rt-ghandle::before { content: ""; position: absolute; left: -7px; top: 50%; width: 5px; height: 11px; margin-top: -5.5px; background: radial-gradient(circle, var(--muted) .9px, transparent 1.2px) 0 0 / 3.5px 3.75px; opacity: 0; transition: opacity .15s; }
+/* apart: Safari before 15.4 drops a whole selector list with :focus-visible in it */
+.rt-group .rt-ghandle:focus-visible::before { opacity: 1; }
+.rt-group .main { flex: 1; min-width: 0; }
+.rt-group .nm { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px; }
+.rt-group .nm b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rt-group .nm code.mdl { font: var(--code-style, normal) 500 11px/1.5 var(--code-font, var(--code)); font-stretch: var(--code-stretch, 100%); color: var(--fg-2); background: var(--card-2); border-radius: 5px; padding: 0 5px; white-space: nowrap; }
+.rt-group .mem { margin-top: 2px; font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rt-group .tags { display: flex; gap: 4px; flex: none; }
+.rt-group .tag { font-size: 11px; line-height: 18px; padding: 0 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); color: var(--muted); white-space: nowrap; }
+/* the routing tag is a pop-up button for the group's routings (#3450) */
+.rt-group button.tag.rt-groute { display: inline-flex; align-items: center; gap: 3px; height: auto; margin: 0; padding: 0 6px 0 8px; border: 0; background: transparent; font: inherit; font-size: 11px; line-height: 18px; color: var(--muted); cursor: pointer; transition: color .12s, background .12s; }
+.rt-group button.tag.rt-groute svg { flex: none; opacity: .7; }
+.rt-group button.tag.rt-groute:hover, .rt-group button.tag.rt-groute.open { color: var(--fg); background: var(--card-2); }
+.rt-group button.tag.rt-groute:focus-visible { outline: none; box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+/* the routing groups switched off: where they were, a line of why and the
+   way back on */
+.rt-goff { display: grid; gap: 6px; }
+.rt-goffbox { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 14px; }
+.rt-goffwhy { flex: 1 1 260px; min-width: 0; font-size: 12px; line-height: 1.5; color: var(--fg-2); }
+.rt-goffon { flex: none; }
+.rt-gfound, .rt-gnames { display: flex; align-items: center; gap: 12px; padding: 2px 4px 4px; }
+.rt-gfound .txt, .rt-gnames .txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.rt-gfound b, .rt-gnames b { font-size: 12.5px; font-weight: 600; }
+.rt-gfound small, .rt-gnames small { font-size: 11.5px; line-height: 1.45; color: var(--muted); }
+/* the names setting's three choices go under its words when it is narrow */
+.rt-gnames { flex-wrap: wrap; }
+.rt-gnames .txt { flex-basis: 220px; }
+.rt-gsec .segs .opt { white-space: nowrap; }
+/* the groups, in a page 520px wide or less */
+:where(.rt-more.max520) .rt-gsec .row-head .note { display: none; }
+:where(.rt-more.max520) .rt-gsec .rt-gfilter { flex: 1 1 auto; width: auto; }
+/* the days the routing history keeps: live, then each day, newest first */
+.rt-days, .rt-group-by { display: flex; gap: 4px; overflow-x: auto; padding: 0 2px 6px; scrollbar-width: none; }
+.rt-days::-webkit-scrollbar, .rt-group-by::-webkit-scrollbar { display: none; }
+.rt-day { flex: none; display: inline-flex; align-items: baseline; gap: 5px; font-size: 12px; color: var(--muted); padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: none; white-space: nowrap; }
+.rt-day:hover { color: var(--fg); }
+.rt-day.on { color: var(--fg); border-color: var(--fg); }
+@supports not (grid-template-columns: subgrid) {
+.rt-req { grid-template-columns: auto fit-content(32%) minmax(min(14em, 30%), 1fr) fit-content(40%); }
+@media (max-width: 700px) {
+.rt-reqs { grid-template-columns: auto minmax(0, 1fr); }
+.rt-req { grid-template-columns: auto minmax(0, 1fr); row-gap: 2px; }
+.rt-req .asked { grid-column: 2; grid-row: 1; }
+.rt-req .to { grid-column: 2; grid-row: 2; }
+.rt-req .meta { grid-column: 2; grid-row: 3; justify-content: flex-start; }
+}
+}
+/* the switch */
+.lib-switch { flex: none; position: relative; width: 32px; height: 19px; border-radius: 10px; background: var(--line); transition: background .2s var(--ease); }
+.lib-switch i { position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .22s var(--ease); }
+.lib-switch.on { background: var(--fg); }
+.lib-switch.on i { transform: translateX(13px); background: var(--card); }
+:root[data-theme="dark"] .lib-switch.on i { background: var(--bg); }
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) .lib-switch.on i { background: var(--bg); }
+}
+.text.danger-fill { background: var(--red); color: #fff; }
+/* ===== context.css ===== */
+/* Context windows: a request's prompt as a card (Routing, the Usage page's
+   Context tab) and each agent's score and tags. */
+:root {
+  --k-system: var(--c6); --k-tools: var(--c2); --k-skills: var(--c7); --k-memory: var(--c4);
+  --k-files: var(--c3); --k-chat: var(--c1);
+  --k-free: color-mix(in srgb, var(--fg) 7%, transparent);
+}
+/* results in orange, its own hue: the palette's pink sank to maroon on a
+   dark tile. Colorblind mode keeps its palette's */
+:root { --k-results: #ea580c; }
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) { --k-results: #fdba74; }
+}
+:root[data-theme="dark"] { --k-results: #fdba74; }
+:root[data-colorblind="1"] { --k-results: var(--c5); }
+i.dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 2.5px; background: var(--k); }
+/* Safari 15: no color-mix, so the free cells and the line's area are
+   tinted by opacity */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+:root { --k-free: rgba(128, 128, 128, .12); }
+}
