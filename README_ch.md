@@ -27,15 +27,15 @@
 
 ```
 better-ui/
-├── better-ui.js         the release: styles + interactions in one file, no dependencies (built by build.js)
-├── src/better-ui.css    style source
-├── src/better-ui.js     script source
-├── build.js             combines src/ into better-ui.js: node build.js
-├── index.html           the example, and the reference markup for every component (GitHub Pages home)
-├── example.js           the example's own data and handlers (no styling)
-├── docs/screenshots/    images for the READMEs
-├── skill/SKILL.md       a skill for AI coding agents: lets them build pages with this kit
-└── LICENSE
+├── better-ui.js         发布版：将样式与交互整合在一个文件中，无外部依赖（由 build.js 构建）
+├── src/better-ui.css    样式源文件
+├── src/better-ui.js     脚本源文件
+├── build.js             将 src/ 中的文件合并为 better-ui.js：运行 node build.js
+├── index.html           示例页面，以及所有组件的参考 HTML 结构（GitHub Pages 首页）
+├── example.js           示例页面专用的数据与事件处理逻辑（不包含样式）
+├── docs/screenshots/    README 文档使用的截图
+├── skill/SKILL.md       面向 AI 编程 Agent 的技能文件：指导 Agent 使用这套组件库构建页面
+└── LICENSE              许可证文件
 ```
 
 ## 快速开始
