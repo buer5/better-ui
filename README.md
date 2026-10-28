@@ -3,19 +3,22 @@
 **English** | [中文](README_ch.md)
 
 A desktop-app style UI kit:
-- sidebar or top-tab navigation;
-- list rows, switches, segmented controls;
-- a dropdown picker, row menus, editor and confirm dialogs;
-- a live flow diagram, usage cards and a settings page.
 
-It ships as one dependency-free JS file, with an example app, "Perch" (a made-up home-server console).
+-   sidebar or top-tab navigation;
+-   list rows, switches, segmented controls;
+-   a dropdown picker, row menus, editor and confirm dialogs;
+-   a live flow diagram, usage cards and a settings page.
 
-**Live demo:** https://buer5.github.io/better-ui/
+It ships as one dependency-free JS file, with an example app, “Perch” (a made-up home-server console).
 
-![Services](docs/screenshots/services.png)
+**Live demo:** [https://buer5.github.io/better-ui/](https://buer5.github.io/better-ui/)
 
-| | |
-|---|---|
+![](docs/screenshots/services.png)
+
+Services
+
+|  |  |
+| --- | --- |
 | ![Sync, dark](docs/screenshots/sync-dark.png) | ![Usage](docs/screenshots/usage.png) |
 | ![Picker](docs/screenshots/picker.png) | ![Settings in the top layout](docs/screenshots/settings-top.png) |
 | ![Add storage, dark](docs/screenshots/add-storage-dark.png) | ![Editor](docs/screenshots/editor.png) |
@@ -37,27 +40,27 @@ better-ui/
 
 ## Quick start
 
-There's nothing to download. Load the kit from jsDelivr:
+There’s nothing to download. Load the kit from jsDelivr:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/buer5/better-ui@main/better-ui.js"></script>
 ```
 
-- **That one file is all you need.** Put it in `<head>` without `defer`. The styles then land before the first paint, so there's no flash of unstyled page, and the interactions attach once the page has loaded.
-- **Write your page in `index.html`'s structure** (see "Usage" below).
+-   **That one file is all you need.** Put it in `<head>` without `defer`. The styles then land before the first paint, so there’s no flash of unstyled page, and the interactions attach once the page has loaded.
+-   **Write your page in `index.html`’s structure** (see “Usage” below).
 
 ### Desktop window mode
 
-Use `<body class="window linux side-nav">`. Don't switch to:
+Use `<body class="window linux side-nav">`. Don’t switch to:
 
-- **`web`**: below 760px wide, or on touch screens, it enlarges buttons, inputs and segmented controls to 44px for fingers.
-- **`mac`**: it reserves 96px for macOS traffic-light buttons.
+-   **`web`**: below 760px wide, or on touch screens, it enlarges buttons, inputs and segmented controls to 44px for fingers.
+-   **`mac`**: it reserves 96px for macOS traffic-light buttons.
 
 On Windows the script adds `html.win`, which switches to Segoe UI.
 
 ## Usage
 
-This isn't a React/Vue-style component library. It is *fixed HTML structure plus the styles written for it*: write your HTML in `index.html`'s structure and the styles apply.
+This isn’t a React/Vue-style component library. It is *fixed HTML structure plus the styles written for it*: write your HTML in `index.html`’s structure and the styles apply.
 
 ```html
 <script src="better-ui.js"></script>  <!-- in <head> -->
@@ -128,8 +131,8 @@ A Storage row:
 
 Icons come in two forms:
 
-- **Colour icons:** `<span class="ic"><img src="…"></span>`.
-- **Monochrome icons**, which follow the text colour: `<span class="ic"><span class="mask" style="--i:url(…)"></span></span>`.
+-   **Colour icons:** `<span class="ic"><img src="…"></span>`.
+-   **Monochrome icons**, which follow the text colour: `<span class="ic"><span class="mask" style="--i:url(…)"></span></span>`.
 
 ### JS
 
@@ -152,27 +155,27 @@ document.addEventListener("bui:view", (e) => e.detail.view);
 
 These work with no JS of your own:
 
-- `.segs` thumbs, `.warm-tabs`, `.lib-switch` and `.agent-more` folding;
-- sidebar drag-to-resize;
-- ⌘/Ctrl+, to open settings.
+-   `.segs` thumbs, `.warm-tabs`, `.lib-switch` and `.agent-more` folding;
+-   sidebar drag-to-resize;
+-   ⌘/Ctrl+, to open settings.
 
 ## Two navigation layouts
 
-- **Window ≥ 1024px: left sidebar.**
-  - Pages are listed in groups, and the current page gets a white block.
-  - Settings sits at the sidebar foot; when open, its categories hang under it.
-  - The header shows "group / page / category", and settings search moves to the header's right.
-- **Narrower: centered top tabs.**
-  - The settings button sits top-right.
-  - Inside settings, the category tabs (small caps) sit top-left and search sits on the right, in a row that sticks to the top.
-- **Narrow windows:** the header tightens in steps. It hides the name first, then packs the tabs closer, then shrinks the type, and finally lets the tabs scroll sideways.
-- **Switching by hand:** the button at the header's left switches layouts and the choice is remembered. Drag the sidebar's right edge to resize it.
-- **No transition animation:** switching between layouts swaps directly.
+-   **Window ≥ 1024px: left sidebar.**
+    -   Pages are listed in groups, and the current page gets a white block.
+    -   Settings sits at the sidebar foot; when open, its categories hang under it.
+    -   The header shows “group / page / category”, and settings search moves to the header’s right.
+-   **Narrower: centered top tabs.**
+    -   The settings button sits top-right.
+    -   Inside settings, the category tabs (small caps) sit top-left and search sits on the right, in a row that sticks to the top.
+-   **Narrow windows:** the header tightens in steps. It hides the name first, then packs the tabs closer, then shrinks the type, and finally lets the tabs scroll sideways.
+-   **Switching by hand:** the button at the header’s left switches layouts and the choice is remembered. Drag the sidebar’s right edge to resize it.
+-   **No transition animation:** switching between layouts swaps directly.
 
 ## Components in the example
 
 | Page | Components (class names) |
-|---|---|
+| --- | --- |
 | Shell | `.sidebar` `#nav.seg` `.nav-gl` `.nav-top-hl` `.nav-sub` `.nav-hl` `.side-gw` `header.top` `.crumb` `.side-toggle` `.icon` `.update` `.foot` `.status` |
 | Services | `.ag-lead` `.list` `.row.agent` `.ag-handle` `.ag-st` `.ag-link` `.field` `.lib-switch` `.ag-cant` `.ag-manage-bar` `.agent-more` `.agent-fold` `.profiles` `.chips` `.chip` |
 | Storage | `.row.provider` `.key` `.pswitch` `.after-list` `#addSheet.sheet` `.row-head` `.find` `.kind` `.grid` `.tile` `.custom-foot` |
@@ -182,21 +185,21 @@ These work with no JS of your own:
 | Settings | `.set-head` `.warm-tabs` `.sess-filter` `.set-page` `.prefs` `.row.pref` `.segs` `.sess-pick` |
 | Overlays | `#pop` picker (with the `#pickerRail` icon rail, `.rail-tip`, `.favorite`), `.pop.row-menu`, `.action-confirm` |
 
-## Install the skill for AI coding agents
+## Skill
 
-`skill/SKILL.md` is a standard-format skill. Once it's installed, ask your agent to "build a … page with better-ui". It then:
+`skill/SKILL.md` is a standard-format skill. Once it’s installed, ask your agent to “build a … page with better-ui”. It then:
 
-- fetches the kit from this repo;
-- uses only the components that exist here;
-- follows `index.html`'s structure, without inventing styles.
+-   fetches the kit from this repo;
+-   uses only the components that exist here;
+-   follows `index.html`’s structure, without inventing styles.
 
 **macOS / Linux:**
 
 ```bash
-# Claude Code, ZCode (Muse and OpenCode read this too)
+# Claude Code, ZCode (OpenCode)
 mkdir -p ~/.claude/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.claude/skills/better-ui/SKILL.md
 
-# Codex CLI, DeepSeek Harness (dsh) (Muse and OpenCode read this too)
+# Codex CLI, DeepSeek Harness (dsh) (OpenCode)
 mkdir -p ~/.agents/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.agents/skills/better-ui/SKILL.md
 
 # WorkBuddy
@@ -214,19 +217,18 @@ New-Item -ItemType Directory -Force "$HOME\.agents\skills\better-ui" | Out-Null;
 # WorkBuddy
 New-Item -ItemType Directory -Force "$env:APPDATA\WorkBuddy\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$env:APPDATA\WorkBuddy\skills\better-ui\SKILL.md"
 ```
-
-To install for a single project only, drop the `~/` (`$HOME\`) from the paths and run the command in the project root. The skill then lands in `.claude/skills/` or `.agents/skills/`.
-
 | Tool | Where it reads skills |
-|---|---|
+| --- | --- |
 | Claude Code | `~/.claude/skills/`, project `.claude/skills/` |
 | Codex CLI | `~/.agents/skills/`, project `.agents/skills/` |
 | ZCode | same as Claude Code |
 | DeepSeek Harness (dsh) | `~/.agents/skills/`; restart dsh afterwards |
 | OpenCode | `~/.config/opencode/skills/`, `~/.claude/skills/`, `~/.agents/skills/`; project `.opencode/skills/`, `.claude/skills/`, `.agents/skills/` |
-| Muse Code | `~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills`; check with `muse skills list` |
 | WorkBuddy | `~/.workbuddy/skills/` (Windows: `%APPDATA%\WorkBuddy\skills\`) |
-| ChatGPT | no local folder: say "Build me a skill" in a chat, paste in SKILL.md, then click Install |
+| ChatGPT | no local folder: say “Build me a skill” in a chat, paste in [SKILL.md](http://SKILL.md), then click Install |
+| Claude (web / desktop) | Settings › Capabilities › Skills: upload the `skill` folder as a zip |
+| WorkBuddy | `~/.workbuddy/skills/` (Windows: `%APPDATA%\WorkBuddy\skills\`) |
+| ChatGPT | no local folder: say “Build me a skill” in a chat, paste in [SKILL.md](http://SKILL.md), then click Install |
 | Claude (web / desktop) | Settings › Capabilities › Skills: upload the `skill` folder as a zip |
 
 ## Editing
