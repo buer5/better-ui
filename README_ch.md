@@ -167,10 +167,10 @@ document.addEventListener("bui:view", (e) => e.detail.view);
 **macOS / Linux：**
 
 ```bash
-# Claude Code、ZCode（Muse 也会读这里）
+# Claude Code、ZCode（Muse、OpenCode 也会读这里）
 mkdir -p ~/.claude/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.claude/skills/better-ui/SKILL.md
 
-# Codex CLI（Muse 也会读这里）
+# Codex CLI、DeepSeek Harness (dsh)（Muse、OpenCode 也会读这里）
 mkdir -p ~/.agents/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.agents/skills/better-ui/SKILL.md
 
 # WorkBuddy
@@ -183,7 +183,7 @@ mkdir -p ~/.workbuddy/skills/better-ui && curl -fsSL https://raw.githubuserconte
 $u = "https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md"
 # Claude Code、ZCode
 New-Item -ItemType Directory -Force "$HOME\.claude\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$HOME\.claude\skills\better-ui\SKILL.md"
-# Codex CLI
+# Codex CLI、DeepSeek Harness (dsh)、OpenCode
 New-Item -ItemType Directory -Force "$HOME\.agents\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$HOME\.agents\skills\better-ui\SKILL.md"
 # WorkBuddy
 New-Item -ItemType Directory -Force "$env:APPDATA\WorkBuddy\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$env:APPDATA\WorkBuddy\skills\better-ui\SKILL.md"
@@ -196,6 +196,8 @@ New-Item -ItemType Directory -Force "$env:APPDATA\WorkBuddy\skills\better-ui" | 
 | Claude Code | `~/.claude/skills/`、项目 `.claude/skills/` |
 | Codex CLI | `~/.agents/skills/`、项目 `.agents/skills/` |
 | ZCode | 与 Claude Code 相同 |
+| DeepSeek Harness (dsh) | `~/.agents/skills/`；装完重启 dsh |
+| OpenCode | `~/.config/opencode/skills/`、`~/.claude/skills/`、`~/.agents/skills/`，项目里的 `.opencode/skills/`、`.claude/skills/`、`.agents/skills/` |
 | Muse Code | `~/.agents/skills`、`~/.claude/skills`、`~/.codex/skills` 都会读；装完用 `muse skills list` 确认 |
 | WorkBuddy | `~/.workbuddy/skills/`（Windows：`%APPDATA%\WorkBuddy\skills\`） |
 | ChatGPT | 没有本地目录：在聊天里说"Build me a skill"，把 SKILL.md 的内容贴进去，确认后点 Install |

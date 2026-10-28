@@ -193,10 +193,10 @@ These work with no JS of your own:
 **macOS / Linux:**
 
 ```bash
-# Claude Code, ZCode (Muse reads this too)
+# Claude Code, ZCode (Muse and OpenCode read this too)
 mkdir -p ~/.claude/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.claude/skills/better-ui/SKILL.md
 
-# Codex CLI (Muse reads this too)
+# Codex CLI, DeepSeek Harness (dsh) (Muse and OpenCode read this too)
 mkdir -p ~/.agents/skills/better-ui && curl -fsSL https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md -o ~/.agents/skills/better-ui/SKILL.md
 
 # WorkBuddy
@@ -209,7 +209,7 @@ mkdir -p ~/.workbuddy/skills/better-ui && curl -fsSL https://raw.githubuserconte
 $u = "https://raw.githubusercontent.com/buer5/better-ui/main/skill/SKILL.md"
 # Claude Code, ZCode
 New-Item -ItemType Directory -Force "$HOME\.claude\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$HOME\.claude\skills\better-ui\SKILL.md"
-# Codex CLI
+# Codex CLI, DeepSeek Harness (dsh), OpenCode
 New-Item -ItemType Directory -Force "$HOME\.agents\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$HOME\.agents\skills\better-ui\SKILL.md"
 # WorkBuddy
 New-Item -ItemType Directory -Force "$env:APPDATA\WorkBuddy\skills\better-ui" | Out-Null; Invoke-WebRequest $u -OutFile "$env:APPDATA\WorkBuddy\skills\better-ui\SKILL.md"
@@ -222,6 +222,8 @@ To install for a single project only, drop the `~/` (`$HOME\`) from the paths an
 | Claude Code | `~/.claude/skills/`, project `.claude/skills/` |
 | Codex CLI | `~/.agents/skills/`, project `.agents/skills/` |
 | ZCode | same as Claude Code |
+| DeepSeek Harness (dsh) | `~/.agents/skills/`; restart dsh afterwards |
+| OpenCode | `~/.config/opencode/skills/`, `~/.claude/skills/`, `~/.agents/skills/`; project `.opencode/skills/`, `.claude/skills/`, `.agents/skills/` |
 | Muse Code | `~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills`; check with `muse skills list` |
 | WorkBuddy | `~/.workbuddy/skills/` (Windows: `%APPDATA%\WorkBuddy\skills\`) |
 | ChatGPT | no local folder: say "Build me a skill" in a chat, paste in SKILL.md, then click Install |
