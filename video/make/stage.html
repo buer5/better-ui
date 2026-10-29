@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>better-ui promo stage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+:root { --ink: #f3f1ec; --dim: rgba(243,241,236,.56); --faint: rgba(243,241,236,.32); --teal: #2dd4bf; --bg: #08080a; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+body { font-family: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; }
+.glow { position: absolute; border-radius: 50%; filter: blur(120px); will-change: transform; }
+#g1 { width: 900px; height: 900px; background: #0f766e; opacity: .32; }
+#g2 { width: 800px; height: 800px; background: #4338ca; opacity: .22; }
+#g3 { width: 700px; height: 500px; background: #f3f1ec; opacity: .0; }
+#grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 72px 72px; -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 50%, #000 0%, transparent 75%); }
+#vig { position: absolute; inset: 0; background: radial-gradient(ellipse 85% 70% at 50% 48%, transparent 55%, rgba(0,0,0,.6) 100%); pointer-events: none; }
+#grain { position: absolute; inset: -200px; opacity: .07; pointer-events: none; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+.blk { position: absolute; left: 0; right: 0; text-align: center; }
+.ch { display: inline-block; white-space: pre; will-change: transform, filter, opacity; }
+.kicker { font: 600 24px/1 Inter; letter-spacing: .42em; color: var(--teal); text-transform: uppercase; }
+.kicker b { color: var(--faint); font-weight: 500; margin-right: .9em; }
+.title { font: 700 74px/1.22 "Noto Sans SC", Inter, sans-serif; letter-spacing: .02em; }
+.title .l2 { color: var(--dim); font-weight: 500; }
+.mono { font: 400 25px/1 "JetBrains Mono", monospace; color: var(--faint); letter-spacing: .02em; }
+.mono i { font-style: normal; color: var(--dim); }
+.hero { font: 700 104px/1.25 "Noto Sans SC", sans-serif; letter-spacing: .03em; }
+.hero.dim { color: var(--dim); font-weight: 400; }
+.en { font: 400 30px/1 Inter; letter-spacing: .32em; color: var(--faint); text-transform: uppercase; }
+.word { font: 800 168px/1 Inter; letter-spacing: -.055em; }
+.word span.dash { color: var(--teal); }
+.sub { font: 500 44px/1.3 "Noto Sans SC", sans-serif; color: var(--ink); letter-spacing: .06em; }
+.meta { font: 400 30px/1 "Noto Sans SC", Inter; color: var(--dim); letter-spacing: .08em; }
+
+#win { position: absolute; inset: 0; perspective: 2200px; perspective-origin: 50% 40%; }
+#frame { position: absolute; left: 0; top: 0; transform-origin: 0 0; border-radius: 18px; overflow: hidden; background: #fff;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 2px 0 0 rgba(255,255,255,.06) inset, 0 80px 160px -30px rgba(0,0,0,.85), 0 30px 60px -20px rgba(0,0,0,.6); }
+#frame iframe { position: absolute; left: 0; top: 0; border: 0; display: block; background: transparent; }
+#sheen { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%); mix-blend-mode: soft-light; }
+#refl { position: absolute; width: 900px; height: 160px; left: 90px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(45,212,191,.22), transparent 70%); filter: blur(30px); }
+
+#cursor { position: absolute; left: 0; top: 0; width: 40px; height: 40px; pointer-events: none; z-index: 20; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
+#ring { position: absolute; width: 80px; height: 80px; margin: -40px 0 0 -40px; border-radius: 50%; border: 3px solid rgba(45,212,191,.9); z-index: 19; opacity: 0; }
+
+#code { position: absolute; left: 70px; right: 70px; top: 760px; border-radius: 26px; padding: 40px 44px 46px; background: rgba(22,22,26,.78);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.09), 0 60px 120px -30px rgba(0,0,0,.8); backdrop-filter: blur(20px); }
+#code .dots { display: flex; gap: 12px; margin-bottom: 34px; }
+#code .dots i { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,.16); }
+#code .dots span { margin-left: auto; font: 400 20px/14px "JetBrains Mono"; color: var(--faint); }
+#code pre { font: 400 31px/1.62 "JetBrains Mono", monospace; color: #e7e5e4; white-space: pre-wrap; word-break: break-all; }
+.tk-t { color: #7dd3fc; } .tk-a { color: #c4b5fd; } .tk-s { color: #5eead4; } .tk-p { color: rgba(231,229,228,.45); }
+#caret { display: inline-block; width: 3px; height: 1.1em; vertical-align: -0.2em; background: var(--teal); margin-left: 2px; }
+#chips { position: absolute; left: 0; right: 0; top: 1330px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 18px; padding: 0 90px; }
+.chip { font: 500 30px/1 Inter, "Noto Sans SC"; padding: 20px 30px; border-radius: 999px; background: rgba(255,255,255,.06); box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset; color: var(--ink); }
+.chip.k { background: transparent; box-shadow: none; color: var(--faint); font-weight: 400; padding-left: 0; padding-right: 0; width: 100%; text-align: center; letter-spacing: .3em; font-size: 24px; text-transform: uppercase; }
+
+#end { position: absolute; inset: 0; }
+#mark { position: absolute; left: 50%; top: 660px; width: 168px; height: 168px; margin-left: -84px; border-radius: 44px;
+  background: linear-gradient(160deg, #1c1c21, #0e0e11); box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 40px 90px -20px rgba(45,212,191,.35), 0 30px 60px -20px rgba(0,0,0,.8); }
+#mark .sw { position: absolute; left: 34px; top: 61px; width: 100px; height: 46px; border-radius: 23px; background: var(--ink); }
+#mark .sw i { position: absolute; top: 6px; width: 34px; height: 34px; border-radius: 50%; background: #0e0e11; }
+#endWord { top: 900px; }
+#endSub { top: 1110px; }
+#endUrl { top: 1340px; }
+.url { display: inline-flex; align-items: center; gap: 16px; font: 500 34px/1 "JetBrains Mono", monospace; color: var(--ink); padding: 26px 38px; border-radius: 999px; background: rgba(255,255,255,.06); box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset; }
+.url svg { width: 36px; height: 36px; }
+#endMeta { top: 1460px; }
+#fade { position: absolute; inset: 0; background: #000; pointer-events: none; z-index: 50; }
+
+.card { position: absolute; border-radius: 26px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 40px 80px -30px rgba(0,0,0,.8); will-change: transform, opacity, filter; }
+.card iframe { position: absolute; left: 0; top: 0; width: 1100px; height: 820px; border: 0; transform-origin: 0 0; pointer-events: none; }
+.clabel { position: absolute; font: 600 27px/1 "Noto Sans SC", Inter; color: var(--ink); white-space: nowrap; will-change: opacity, transform; }
+.clabel code { font: 400 22px/1 "JetBrains Mono", monospace; color: var(--teal); margin-left: 14px; }
+.co { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font: 600 24px/1 "Noto Sans SC", Inter; padding: 14px 20px; border-radius: 999px; background: rgba(14,14,17,.9); box-shadow: 0 0 0 1px rgba(45,212,191,.45) inset, 0 16px 30px -10px rgba(0,0,0,.6); color: var(--ink); }
+.co code { font: 500 21px/1 "JetBrains Mono", monospace; color: var(--teal); margin-right: 12px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="glow" id="g1"></div><div class="glow" id="g2"></div><div class="glow" id="g3"></div>
+  <div id="grid"></div>
+
+  <!-- S1 -->
+  <div class="blk hero" id="s1a" style="top:700px">一个 JS 文件，</div>
+  <div class="blk hero dim" id="s1b" style="top:840px">一整套桌面级组件。</div>
+  <div class="blk en" id="s1c" style="top:1080px">UI kit · zero dependencies</div>
+
+  <!-- S2 -->
+  <div class="blk word" id="s2a" style="top:760px">better<span class="dash">-</span>ui</div>
+  <div class="blk sub" id="s2b" style="top:990px">桌面应用风格的 Web UI 组件套件</div>
+  <div class="blk meta" id="s2c" style="top:1090px">零依赖 · 无需构建 · MIT 开源</div>
+
+  <!-- feature scenes: kicker / title / mono -->
+  <div class="blk kicker" id="k1" style="top:250px"><b>01</b>组件</div>
+  <div class="blk title" id="t1" style="top:310px"><div>开关、分段、列表、导航</div><div class="l2">每一个都是原生质感</div></div>
+
+  <div class="blk kicker" id="k2" style="top:250px"><b>02</b>浮层</div>
+  <div class="blk title" id="t2" style="top:310px"><div>选择器、菜单、对话框</div><div class="l2">动效与键盘操作都已做好</div></div>
+
+  <div class="blk kicker" id="k3" style="top:250px"><b>03</b>组合</div>
+  <div class="blk title" id="t3" style="top:310px"><div>拼起来，就是一个应用</div><div class="l2">每一块都是现成组件</div></div>
+  <div class="blk mono" id="m3" style="top:1580px">示例应用 Perch · 仓库自带 · index.html</div>
+
+  <div class="blk kicker" id="k4" style="top:250px"><b>04</b>主题</div>
+  <div class="blk title" id="t4" style="top:310px"><div>明暗两套主题</div><div class="l2">跟随系统，一行切换</div></div>
+  <div class="blk mono" id="m4" style="top:1580px">&lt;html data-theme="dark"&gt;</div>
+
+  <div class="blk kicker" id="k5" style="top:250px"><b>05</b>布局</div>
+  <div class="blk title" id="t5" style="top:310px"><div>侧边栏 ⇄ 顶部标签</div><div class="l2">随窗口宽度自动切换</div></div>
+  <div class="blk mono" id="m5" style="top:1580px">≥ 1024px  sidebar   ·   &lt; 1024px  tabs</div>
+
+  <div class="blk kicker" id="k6" style="top:250px"><b>06</b>上手</div>
+  <div class="blk title" id="t6" style="top:310px"><div>一行引入</div><div class="l2">无需构建，无需安装</div></div>
+
+  <div id="cards"></div>
+  <div id="refl"></div>
+  <div id="win"><div id="frame">
+    <iframe id="f1" src="/index.html"></iframe>
+    <iframe id="f2" src="/index.html"></iframe>
+    <div id="sheen"></div>
+  </div></div>
+
+  <svg id="lines" width="1080" height="1920" style="position:absolute;left:0;top:0;pointer-events:none"></svg>
+  <div id="callouts"></div>
+
+  <div id="code">
+    <div class="dots"><i></i><i></i><i></i><span>index.html</span></div>
+    <pre id="codeText"></pre>
+  </div>
+  <div id="chips">
+    <div class="chip k" data-i="0">附带 AI Agent Skill</div>
+    <div class="chip" data-i="1">Claude Code</div>
+    <div class="chip" data-i="2">Codex</div>
+    <div class="chip" data-i="3">OpenCode</div>
+    <div class="chip" data-i="4">WorkBuddy</div>
+    <div class="chip" data-i="5">ChatGPT</div>
+  </div>
+
+  <div id="end">
+    <div id="mark"><div class="sw"><i></i></div></div>
+    <div class="blk word" id="endWord" style="font-size:132px">better<span class="dash">-</span>ui</div>
+    <div class="blk sub" id="endSub" style="font-size:40px; color:var(--dim)">桌面应用风格的 Web UI 组件套件</div>
+    <div class="blk" id="endUrl"><span class="url"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>github.com/buer5/better-ui</span></div>
+    <div class="blk meta" id="endMeta">开源 · MIT · 欢迎 Star</div>
+  </div>
+
+  <div id="ring"></div>
+  <svg id="cursor" viewBox="0 0 32 32"><path d="M7 4.5v20.2c0 .8 1 1.2 1.5.6l4.6-5.1 3.3 7.4c.2.5.8.7 1.3.5l2.6-1.1c.5-.2.7-.8.5-1.3l-3.3-7.3 6.9-.4c.8 0 1.2-1 .6-1.5L8.6 3.7C8 3.2 7 3.6 7 4.5z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>
+
+  <div id="vig"></div>
+  <div id="grain"></div>
+  <div id="fade"></div>
+</div>
+<script src="stage.js"></script>
+</body>
+</html>
