@@ -151,9 +151,19 @@
     const v = ["system", "light", "dark"][e.detail.index], root = document.documentElement;
     if (v === "system") delete root.dataset.theme; else root.dataset.theme = v;
   });
+  { const s = segsIn("#styleSegs"), syncStyle = () => {
+      const i = BUI.style?.get() === "claude" ? 1 : 0;
+      $$(".opt", s).forEach((o, k) => { o.classList.toggle("on", k === i); o.setAttribute("aria-pressed", String(k === i)); });
+    };
+    if (s) {
+      syncStyle();
+      s.addEventListener("pick", (e) => { BUI.style?.set(["default", "claude"][e.detail.index]); });
+      document.addEventListener("bui:style", syncStyle);
+    }
+  }
   segsIn("#colorblindSegs")?.addEventListener("pick", (e) => { if (e.detail.index) document.documentElement.dataset.colorblind = "1"; else delete document.documentElement.dataset.colorblind; });
   page?.addEventListener("pick", (e) => {
-    if (e.target === tabs || e.target.closest("#themeSegs, #colorblindSegs")) return;
+    if (e.target === tabs || e.target.closest("#themeSegs, #styleSegs, #colorblindSegs")) return;
     const row = e.target.closest(".row"); if (row) say(row.querySelector(".name").textContent + "：" + e.detail.button.textContent.trim(), "ok");
   });
   for (const b of $$("#view-settings .row .text, #view-settings .pref-pick")) b.addEventListener("click", () => {

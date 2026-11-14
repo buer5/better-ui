@@ -1,0 +1,266 @@
+/* better-ui — Claude style layer, derived from @liuhanlin23/claude-ui
+   (https://github.com/Liuhanlin23/claude-ui, MIT).
+   Supports full-page switching (`<html data-style="claude">`) and scoped
+   coexistence (`<section data-style="claude">` inside a default page, or
+   `<section data-style="default">` inside a Claude page). */
+
+[data-style="claude"] {
+  --bg: #f4f4f1;
+  --card: #ffffff;
+  --card-2: #fcfcfb;
+  --pill: #efeeeb;
+  --pill-hover: #e6e5e0;
+  --seg-track: rgba(11, 11, 11, .05);
+  --seg-thumb: #ffffff;
+  --seg-edge: 0 0 0 1px rgba(11, 11, 11, .10), 0 1px 2px 0 rgba(11, 11, 11, .06);
+  --ctl-fg: #5f5d59;
+  --line: rgba(11, 11, 11, .10);
+  --line-2: rgba(11, 11, 11, .06);
+  --fg: #0b0b0b;
+  --fg-2: #52514e;
+  --muted: #898781;
+  --faint: #b3b2a8;
+  --accent: #c6613f;
+  --accent-hover: #d97757;
+  --accent-soft: #faefeb;
+  --accent-fg: #ffffff;
+  --sel: #f8e9e2;
+  --green: #009300;
+  --green-soft: #caeac7;
+  --red: #d03b3b;
+  --red-soft: #fad6d6;
+  --amber: #b87700;
+  --amber-soft: #f9dca4;
+  --drift: #cf3a3a;
+  --drift-soft: #fad6d6;
+  --pop-bg: rgba(255, 255, 255, .97);
+  --shadow: 0 0 0 1px rgba(11, 11, 11, .10), 0 8px 24px rgba(0, 0, 0, .12), 0 2px 6px rgba(0, 0, 0, .08);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Lora", Georgia, "Songti SC", "STSong", serif;
+  --code: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --logo-invert: 0;
+  --tk-s: #0f805e; --tk-k: #6351d6; --tk-f: #256bc1; --tk-n: #b87700; --tk-v: #199f70; --tk-o: #ae3d66; --tk-c: #898781;
+  --c1: #c6613f; --c2: #2a78d6; --c3: #0f805e; --c4: #db9200; --c5: #ae3d66; --c6: #6351d6; --c7: #6e6c68;
+  --k-results: #c6613f;
+
+  /* @liuhanlin23/claude-ui surface & interaction tokens */
+  --claude-surface-0: #f9f9f7;
+  --claude-surface-1: #fcfcfb;
+  --claude-surface-2: #ffffff;
+  --claude-fill-primary: #0b0b0b;
+  --claude-fill-primary-hover: #2c2c2a;
+  --claude-on-primary: #ffffff;
+  --claude-card-ring: 0 0 0 1px rgba(11, 11, 11, .10);
+  --claude-panel-sm: 0 0 0 1px rgba(11, 11, 11, .10), 0 1px 2px 0 rgba(11, 11, 11, .06), 0 2px 8px 0 rgba(11, 11, 11, .08);
+  --claude-radius-card: 12px;
+  --claude-radius: 6px;
+  --claude-scrollbar: rgba(31, 31, 30, .35);
+  --claude-spring: linear(0, .2459, .6526, .9468, 1.0764, 1.0915, 1.0585, 1.0219, .9993, .9914, .9921, .9957, .9988, 1.0004, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-style="claude"],
+  :root:not([data-theme="light"]) [data-style="claude"],
+  [data-style="claude"]:not([data-theme="light"]) {
+    --bg: #1f1f1e;
+    --card: #2c2c2a;
+    --card-2: #1a1a19;
+    --pill: rgba(255, 255, 255, .10);
+    --pill-hover: rgba(255, 255, 255, .16);
+    --seg-track: rgba(255, 255, 255, .05);
+    --seg-thumb: rgba(255, 255, 255, .20);
+    --seg-edge: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 1px 2px rgba(0, 0, 0, .3);
+    --ctl-fg: #a6a59b;
+    --line: rgba(255, 255, 255, .10);
+    --line-2: rgba(255, 255, 255, .06);
+    --fg: #ffffff;
+    --fg-2: #c3c2b7;
+    --muted: #97958c;
+    --faint: #5f5d59;
+    --accent: #d97757;
+    --accent-hover: #ec845b;
+    --accent-soft: #361407;
+    --accent-fg: #ffffff;
+    --sel: #4a1a08;
+    --green: #0ca30c;
+    --green-soft: #11260f;
+    --red: #ec7e7e;
+    --red-soft: #3c0e0e;
+    --amber: #db9300;
+    --amber-soft: #311a00;
+    --drift: #ec7e7e;
+    --drift-soft: #3c0e0e;
+    --pop-bg: rgba(56, 56, 53, .97);
+    --shadow: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 8px 24px rgba(0, 0, 0, .32), 0 2px 6px rgba(0, 0, 0, .20);
+    --logo-invert: 1;
+    --tk-s: #58ca9f; --tk-k: #beb8f5; --tk-f: #85b5ef; --tk-n: #f9c867; --tk-v: #79d7b3; --tk-o: #f3aac5; --tk-c: #97958c;
+    --c1: #d97757; --c2: #6fa7ec; --c3: #3cbe8c; --c4: #fab319; --c5: #e87da6; --c6: #9e94eb; --c7: #97958c;
+    --k-results: #d97757;
+
+    --claude-surface-0: #0d0d0d;
+    --claude-surface-1: #1a1a19;
+    --claude-surface-2: #2c2c2a;
+    --claude-fill-primary: #ffffff;
+    --claude-fill-primary-hover: #e1e0d9;
+    --claude-on-primary: #0b0b0b;
+    --claude-card-ring: inset 0 0 0 1px rgba(255, 255, 255, .10);
+    --claude-panel-sm: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 1px 2px 0 rgba(11, 11, 11, .06), 0 2px 8px 0 rgba(0, 0, 0, .24);
+    --claude-scrollbar: rgba(226, 225, 218, .35);
+  }
+}
+
+:root[data-theme="dark"][data-style="claude"],
+:root[data-theme="dark"] [data-style="claude"],
+[data-style="claude"][data-theme="dark"] {
+  --bg: #1f1f1e;
+  --card: #2c2c2a;
+  --card-2: #1a1a19;
+  --pill: rgba(255, 255, 255, .10);
+  --pill-hover: rgba(255, 255, 255, .16);
+  --seg-track: rgba(255, 255, 255, .05);
+  --seg-thumb: rgba(255, 255, 255, .20);
+  --seg-edge: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 1px 2px rgba(0, 0, 0, .3);
+  --ctl-fg: #a6a59b;
+  --line: rgba(255, 255, 255, .10);
+  --line-2: rgba(255, 255, 255, .06);
+  --fg: #ffffff;
+  --fg-2: #c3c2b7;
+  --muted: #97958c;
+  --faint: #5f5d59;
+  --accent: #d97757;
+  --accent-hover: #ec845b;
+  --accent-soft: #361407;
+  --accent-fg: #ffffff;
+  --sel: #4a1a08;
+  --green: #0ca30c;
+  --green-soft: #11260f;
+  --red: #ec7e7e;
+  --red-soft: #3c0e0e;
+  --amber: #db9300;
+  --amber-soft: #311a00;
+  --drift: #ec7e7e;
+  --drift-soft: #3c0e0e;
+  --pop-bg: rgba(56, 56, 53, .97);
+  --shadow: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 8px 24px rgba(0, 0, 0, .32), 0 2px 6px rgba(0, 0, 0, .20);
+  --logo-invert: 1;
+  --tk-s: #58ca9f; --tk-k: #beb8f5; --tk-f: #85b5ef; --tk-n: #f9c867; --tk-v: #79d7b3; --tk-o: #f3aac5; --tk-c: #97958c;
+  --c1: #d97757; --c2: #6fa7ec; --c3: #3cbe8c; --c4: #fab319; --c5: #e87da6; --c6: #9e94eb; --c7: #97958c;
+  --k-results: #d97757;
+
+  --claude-surface-0: #0d0d0d;
+  --claude-surface-1: #1a1a19;
+  --claude-surface-2: #2c2c2a;
+  --claude-fill-primary: #ffffff;
+  --claude-fill-primary-hover: #e1e0d9;
+  --claude-on-primary: #0b0b0b;
+  --claude-card-ring: inset 0 0 0 1px rgba(255, 255, 255, .10);
+  --claude-panel-sm: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 1px 2px 0 rgba(11, 11, 11, .06), 0 2px 8px 0 rgba(0, 0, 0, .24);
+  --claude-scrollbar: rgba(226, 225, 218, .35);
+}
+
+:root.win[data-style="claude"],
+:root.win [data-style="claude"] {
+  --font: system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+  --code: "Geist Mono", "Cascadia Mono", Consolas, "Microsoft YaHei UI", "Microsoft YaHei", monospace;
+}
+
+/* Scoped coexistence: a Claude container inside a default page (or vice versa) */
+[data-style="claude"]:not(html),
+[data-style="default"]:not(html) {
+  color: var(--fg);
+  font-family: var(--font);
+}
+
+[data-style="claude"]:not(html) {
+  background: var(--bg);
+}
+
+/* Thin macOS-style scrollbars (claude-ui globals.css) */
+[data-style="claude"],
+[data-style="claude"] * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--claude-scrollbar) transparent;
+}
+
+/* Editorial Lora serif headings (claude-ui theme.css) */
+[data-style="claude"] .brand,
+[data-style="claude"] .ehead h2,
+[data-style="claude"] .kpi .val,
+[data-style="claude"] .action-confirm h3,
+[data-style="claude"] .rt-hub .name,
+[data-style="claude"] .cal-head b,
+[data-style="claude"] .donut-center b {
+  font-family: var(--font-serif);
+}
+
+/* Cards & panels: 12px radius + 1px ring */
+[data-style="claude"] .list,
+[data-style="claude"] .kpi,
+[data-style="claude"] .rt,
+[data-style="claude"] .sheet,
+[data-style="claude"] .profiles,
+[data-style="claude"] .dialog,
+[data-style="claude"] .action-confirm,
+[data-style="claude"] .cal,
+[data-style="claude"] .donut-card,
+[data-style="claude"] .tl {
+  border-radius: var(--claude-radius-card);
+  box-shadow: var(--claude-card-ring);
+}
+
+[data-style="claude"] .banner {
+  border-radius: var(--claude-radius-card);
+}
+
+[data-style="claude"] .pop {
+  border-radius: var(--claude-radius-card);
+  box-shadow: var(--shadow);
+}
+
+[data-style="claude"] .dialog {
+  box-shadow: var(--claude-panel-sm);
+}
+
+/* Tactile button press-and-spring (.btn-squish from claude-ui button.css) */
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell) {
+  cursor: pointer;
+  transition:
+    transform .45s var(--claude-spring),
+    background-color .12s ease-out,
+    border-color .12s ease-out,
+    color .12s ease-out;
+}
+
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell):active:not(:disabled) {
+  transform: scale(0.975);
+  transition:
+    transform 60ms ease-out,
+    background-color .12s ease-out,
+    border-color .12s ease-out,
+    color .12s ease-out;
+}
+
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell):disabled {
+  cursor: default;
+}
+
+/* Primary action buttons: solid ink (#0b0b0b / #fff), matching claude-ui fill-primary */
+[data-style="claude"] .text.primary,
+[data-style="claude"] .bar .ok {
+  background: var(--claude-fill-primary);
+  color: var(--claude-on-primary);
+}
+[data-style="claude"] .text.primary:hover:not(:disabled),
+[data-style="claude"] .bar .ok:hover:not(:disabled) {
+  background: var(--claude-fill-primary-hover);
+}
+
+/* Sidebar active highlight & warm surface */
+[data-style="claude"] .nav-top-hl {
+  border-radius: 8px;
+  box-shadow: var(--claude-card-ring);
+}
+
+[data-style="claude"] .lib-switch.on {
+  background: var(--accent);
+}
