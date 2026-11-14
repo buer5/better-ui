@@ -1,6 +1,6 @@
 /* better-ui — styles. The class names and ids are part of the rules: write pages in index.html's structure. */
 /* ===== app.css ===== */
-:root {
+:root, [data-style="default"] {
   --bg: #f4f4f6;
   --card: #ffffff;
   --card-2: #f9f9fb;      /* expanded editor */
@@ -42,7 +42,9 @@
   --c1: #4f46e5; --c2: #0ea5e9; --c3: #10b981; --c4: #f59e0b; --c5: #ec4899; --c6: #8b5cf6; --c7: #64748b;
 }
 @media (prefers-color-scheme: dark) {
-:root:not([data-theme="light"]) {
+:root:not([data-theme="light"]),
+:root:not([data-theme="light"]) [data-style="default"],
+[data-style="default"]:not([data-theme="light"]) {
     --bg: #1a1a1e;
     --card: #232327;
     --card-2: #1f1f23;
@@ -77,7 +79,9 @@
     --c1: #a5b4fc; --c2: #7dd3fc; --c3: #6ee7b7; --c4: #fcd34d; --c5: #f9a8d4; --c6: #c4b5fd; --c7: #94a3b8;
   }
 }
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+:root[data-theme="dark"] [data-style="default"],
+[data-style="default"][data-theme="dark"] {
   --bg: #1a1a1e; --card: #232327; --card-2: #1f1f23; --pill: #2d2d33; --pill-hover: #36363d;
   --seg-track: rgba(255, 255, 255, .035); --seg-thumb: rgba(255, 255, 255, .15); --seg-edge: inset 0 .5px 0 rgba(255, 255, 255, .08), 0 1px 2px rgba(0, 0, 0, .3);
   --line: #333339; --line-2: #2c2c32; --fg: #ededf1; --fg-2: #b9b9c1; --muted: #8b8b94; --faint: #56565f; --ctl-fg: #a1a1aa;
@@ -92,7 +96,8 @@
 }
 /* Okabe–Ito qualitative series (#2073): adjacent series stay apart in hue and
    lightness in both light and dark themes */
-:root[data-colorblind="1"] {
+:root[data-colorblind="1"],
+:root[data-colorblind="1"] [data-style] {
   --c1: #0072b2; --c2: #e69f00; --c3: #009e73; --c4: #d55e00; --c5: #cc79a7; --c6: #56b4e9; --c7: #64748b;
 }
 /* Windows' own text faces, and Chinese in YaHei UI, its UI face for it, not
@@ -1403,7 +1408,7 @@ input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline
 /* ===== context.css ===== */
 /* Context windows: a request's prompt as a card (Routing, the Usage page's
    Context tab) and each agent's score and tags. */
-:root {
+:root, [data-style="default"] {
   --k-system: var(--c6); --k-tools: var(--c2); --k-skills: var(--c7); --k-memory: var(--c4);
   --k-files: var(--c3); --k-chat: var(--c1);
   --k-free: color-mix(in srgb, var(--fg) 7%, transparent);
@@ -1412,10 +1417,15 @@ input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline
    dark tile. Colorblind mode keeps its palette's */
 :root { --k-results: #ea580c; }
 @media (prefers-color-scheme: dark) {
-:root:not([data-theme="light"]) { --k-results: #fdba74; }
+:root:not([data-theme="light"]),
+:root:not([data-theme="light"]) [data-style="default"],
+[data-style="default"]:not([data-theme="light"]) { --k-results: #fdba74; }
 }
-:root[data-theme="dark"] { --k-results: #fdba74; }
-:root[data-colorblind="1"] { --k-results: var(--c5); }
+:root[data-theme="dark"],
+:root[data-theme="dark"] [data-style="default"],
+[data-style="default"][data-theme="dark"] { --k-results: #fdba74; }
+:root[data-colorblind="1"],
+:root[data-colorblind="1"] [data-style] { --k-results: var(--c5); }
 i.dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 2.5px; background: var(--k); }
 /* Safari 15: no color-mix, so the free cells and the line's area are
    tinted by opacity */

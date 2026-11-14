@@ -139,6 +139,7 @@ better-ui/
 ```js
 BUI.go("settings");                         // switch view (#view-settings); the URL shows #/settings
 BUI.layout.toggle();  BUI.layout.set(true);  // sidebar ⇄ top tabs
+BUI.style.set("claude");  BUI.style.toggle(); // default ⇄ claude (@liuhanlin23/claude-ui)
 BUI.picker(fieldButton, {                    // the #pop picker
   items: [{ group: "Local", icon: "…" }, { value: "a", label: "NAS main", note: "Local · 8 TB", icon: "…" }],
   value: "a", rail: true, favorites: new Set(), placeholder: "Filter…",
@@ -151,7 +152,14 @@ BUI.status("Saved", "ok");                     // footer #status; floats as a pi
 el.addEventListener("pick", (e) => e.detail.index);    // .segs / .warm-tabs
 el.addEventListener("toggle", (e) => e.detail.on);     // .lib-switch
 document.addEventListener("bui:view", (e) => e.detail.view);
+document.addEventListener("bui:style", (e) => e.detail.style);
 ```
+
+### 两种风格（切换或共存）
+
+-   **默认风格**（`data-style="default"` 或不设置）：桌面端冷灰调与靛蓝强调色。
+-   **Claude 风格**（`data-style="claude"`）：基于 [@liuhanlin23/claude-ui](https://github.com/Liuhanlin23/claude-ui) 的暖中性纸感色板、赤陶橙强调色（`#c6613f`）、Lora 衬线标题、12px 卡片描边环与按压回弹动效。
+-   **切换与共存**：调用 `BUI.style.set("claude")` / `BUI.style.toggle()`（或在「设置 → 常规 → 界面风格」中切换）可全局切换；在任意容器上添加 `data-style="claude"` 或 `data-style="default"` 即可在同一页面中局部共存。
 
 以下功能无需编写自己的 JavaScript 即可使用：
 

@@ -9,7 +9,8 @@ better-ui is a desktop-app style UI kit:
 
 - `better-ui.js` is the whole kit in one file: it injects the styles and provides the interactions, with no dependencies.
 - `index.html` is a complete example app ("Perch"). It is also the reference markup for every component.
-- `src/better-ui.css` and `src/better-ui.js` are the sources that `build.js` combines into `better-ui.js`.
+- `src/better-ui.css`, `src/claude-ui.css`, and `src/better-ui.js` are the sources that `build.js` combines into `better-ui.js`.
+- Two styles are built in and can be switched or coexist: `default` (`data-style="default"` or unset) and `claude` (`data-style="claude"`, derived from `@liuhanlin23/claude-ui`), controlled via `BUI.style.set("claude" | "default")`, `BUI.style.toggle()`, or per-container `data-style` attributes.
 
 Repository: https://github.com/buer5/better-ui
 

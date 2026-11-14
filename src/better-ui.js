@@ -211,6 +211,8 @@
     };
     q.oninput = draw;
     draw();
+    const scopedStyle = anchor.closest?.("[data-style]")?.dataset.style;
+    if (scopedStyle) pop.dataset.style = scopedStyle; else delete pop.dataset.style;
     pop.hidden = false;
     anchor.classList.add("open");
     placePop(pop, anchor, o.rail ? 490 : 372);
@@ -221,7 +223,7 @@
       if (e.key === "ArrowDown") { e.preventDefault(); sel = Math.min(shown.length - 1, sel + 1); mark(true); }
       else if (e.key === "ArrowUp") { e.preventDefault(); sel = Math.max(0, sel - 1); mark(true); }
       else if (e.key === "Enter") { e.preventDefault(); pick(sel); }
-    }, () => { pop.hidden = true; });
+    }, () => { pop.hidden = true; delete pop.dataset.style; });
   }
   // a rail icon's name beside it (app.js showRailTip): the first waits a moment, the next comes at once
   let tip = null, tipT = 0, tipAt = 0;
@@ -244,6 +246,8 @@
   function menu(anchor, items) {
     if (openPop?.anchor === anchor) { closePop(); return; }
     const m = el("div", "pop row-menu"); m.setAttribute("role", "menu");
+    const scopedStyle = anchor.closest?.("[data-style]")?.dataset.style;
+    if (scopedStyle) m.dataset.style = scopedStyle;
     for (const it of items) {
       if (it === "-") { m.append(el("div", "rm-sep")); continue; }
       const b = el("button", "rm-item"); b.type = "button"; b.setAttribute("role", "menuitem");
@@ -620,5 +624,27 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
-  window.BUI = { go: (v) => layout.go?.(v), layout, picker, menu, closePop, modal, closeModal, confirm, status, slide };
+  // ---- style: default | claude (via @liuhanlin23/claude-ui tokens) ----
+  const STYLE_KEY = "better-ui.style";
+  const applyStyle = (name) => {
+    const s = name === "claude" ? "claude" : "default";
+    const root = document.documentElement;
+    if (s === "claude") root.dataset.style = "claude"; else delete root.dataset.style;
+    return s;
+  };
+  if (store.get(STYLE_KEY) === "claude") applyStyle("claude");
+  const style = {
+    styles: ["default", "claude"],
+    get: () => (document.documentElement.dataset.style === "claude" ? "claude" : "default"),
+    set(name, opts) {
+      const s = applyStyle(name);
+      if (opts?.persist !== false) store.set(STYLE_KEY, s);
+      requestAnimationFrame(slideAll);
+      document.dispatchEvent(new CustomEvent("bui:style", { detail: { style: s } }));
+      return s;
+    },
+    toggle() { return style.set(style.get() === "claude" ? "default" : "claude"); },
+  };
+
+  window.BUI = { go: (v) => layout.go?.(v), layout, style, picker, menu, closePop, modal, closeModal, confirm, status, slide };
 })();

@@ -28,7 +28,8 @@ Services
 ```
 better-ui/
 ├── better-ui.js         the release: styles + interactions in one file, no dependencies (built by build.js)
-├── src/better-ui.css    style source
+├── src/better-ui.css    style source (default)
+├── src/claude-ui.css    style source (Claude, via @liuhanlin23/claude-ui)
 ├── src/better-ui.js     script source
 ├── build.js             combines src/ into better-ui.js: node build.js
 ├── index.html           the example, and the reference markup for every component (GitHub Pages home)
@@ -139,6 +140,7 @@ Icons come in two forms:
 ```js
 BUI.go("settings");                         // switch view (#view-settings); the URL shows #/settings
 BUI.layout.toggle();  BUI.layout.set(true);  // sidebar ⇄ top tabs
+BUI.style.set("claude");  BUI.style.toggle(); // default ⇄ claude (@liuhanlin23/claude-ui)
 BUI.picker(fieldButton, {                    // the #pop picker
   items: [{ group: "Local", icon: "…" }, { value: "a", label: "NAS main", note: "Local · 8 TB", icon: "…" }],
   value: "a", rail: true, favorites: new Set(), placeholder: "Filter…",
@@ -151,7 +153,14 @@ BUI.status("Saved", "ok");                     // footer #status; floats as a pi
 el.addEventListener("pick", (e) => e.detail.index);    // .segs / .warm-tabs
 el.addEventListener("toggle", (e) => e.detail.on);     // .lib-switch
 document.addEventListener("bui:view", (e) => e.detail.view);
+document.addEventListener("bui:style", (e) => e.detail.style);
 ```
+
+### Two styles (switch or coexist)
+
+-   **Default** (`data-style="default"`, or unset): crisp desktop slate with indigo accents.
+-   **Claude** (`data-style="claude"`): warm unbleached-paper neutrals, clay accent (`#c6613f`), Lora serif headings, 12px card rings, and tactile button spring from [@liuhanlin23/claude-ui](https://github.com/Liuhanlin23/claude-ui).
+-   **Switch globally** via `BUI.style.set("claude")` / `BUI.style.toggle()` (or Settings → General → 界面风格), or **coexist** on the same page by placing `data-style="claude"` or `data-style="default"` on any container element.
 
 These work with no JS of your own:
 

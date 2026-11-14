@@ -1,7 +1,10 @@
 // Builds the single-file release: better-ui.js = the stylesheet (injected as a <style>) + the script.
 // node build.js   (no dependencies)
 const fs = require("fs");
-const css = fs.readFileSync(__dirname + "/src/better-ui.css", "utf8");
+const css =
+  fs.readFileSync(__dirname + "/src/better-ui.css", "utf8") +
+  "\n" +
+  fs.readFileSync(__dirname + "/src/claude-ui.css", "utf8");
 const js = fs.readFileSync(__dirname + "/src/better-ui.js", "utf8");
 const out = `/*! better-ui · MIT · https://github.com/buer5/better-ui */
 (function () {
