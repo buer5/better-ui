@@ -1508,3 +1508,18 @@ i.dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radiu
 .tl-body b { display: block; font-size: 13px; font-weight: 500; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tl-body small { display: block; font-size: 11.5px; color: var(--muted); }
 .tl-amt { font-size: 13px; font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; flex: none; }
+
+.grid-12 { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin: 0 0 12px; }
+.m-cell { display: flex; flex-direction: column; gap: 3px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--card); text-align: left; cursor: pointer; transition: border-color .15s, background .15s, transform .12s; }
+.m-cell:hover { border-color: var(--line); background: var(--pill); transform: translateY(-1px); }
+.m-cell.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.m-cell[data-lvl="1"] { background: color-mix(in srgb, var(--accent-soft) 25%, var(--card)); }
+.m-cell[data-lvl="2"] { background: color-mix(in srgb, var(--accent-soft) 50%, var(--card)); }
+.m-cell[data-lvl="3"] { background: color-mix(in srgb, var(--amber-soft) 55%, var(--card)); }
+.m-cell[data-lvl="4"] { background: color-mix(in srgb, var(--red-soft) 55%, var(--card)); }
+.m-cell span { font-size: 11px; font-weight: 600; color: var(--muted); }
+.m-cell b { font-size: 13px; font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.m-cell small { font-size: 10.5px; color: var(--muted); }
+@media (max-width: 760px) {
+  .grid-12 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
