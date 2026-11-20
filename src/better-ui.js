@@ -624,6 +624,29 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
+  // ---- stepper (.stepper > .step-btn + input[type=number] + .step-btn) ----
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".stepper .step-btn");
+    if (!btn || btn.disabled) return;
+    const box = btn.closest(".stepper"), input = $("input[type=number]", box);
+    if (!input) return;
+    const dir = Number(btn.dataset.dir || (btn.textContent.trim() === "+" ? 1 : -1));
+    const step = Number(input.step || box.dataset.step || 1) || 1;
+    const min = input.min !== "" ? Number(input.min) : (box.dataset.min != null ? Number(box.dataset.min) : -Infinity);
+    const max = input.max !== "" ? Number(input.max) : (box.dataset.max != null ? Number(box.dataset.max) : Infinity);
+    const cur = Number.isFinite(Number(input.value)) && input.value !== "" ? Number(input.value) : (Number.isFinite(min) ? min : 0);
+    const dec = Math.max((String(step).split(".")[1] || "").length, (String(cur).split(".")[1] || "").length);
+    const next = Math.min(max, Math.max(min, Number((cur + dir * step).toFixed(dec))));
+    if (next === cur) return;
+    input.value = String(next);
+    const decBtn = $('.step-btn[data-dir="-1"]', box), incBtn = $('.step-btn[data-dir="1"]', box);
+    if (decBtn) decBtn.disabled = next <= min;
+    if (incBtn) incBtn.disabled = next >= max;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    box.dispatchEvent(new CustomEvent("step", { bubbles: true, detail: { value: next } }));
+  });
+
   // ---- style: default | claude (via @liuhanlin23/claude-ui tokens) ----
   const STYLE_KEY = "better-ui.style";
   const applyStyle = (name) => {
