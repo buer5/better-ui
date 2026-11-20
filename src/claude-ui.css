@@ -222,7 +222,7 @@
 }
 
 /* Tactile button press-and-spring (.btn-squish from claude-ui button.css) */
-[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell) {
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell, .stepper .step-btn) {
   cursor: pointer;
   transition:
     transform .45s var(--claude-spring),
@@ -231,7 +231,7 @@
     color .12s ease-out;
 }
 
-[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell):active:not(:disabled) {
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell, .stepper .step-btn):active:not(:disabled) {
   transform: scale(0.975);
   transition:
     transform 60ms ease-out,
@@ -240,7 +240,7 @@
     color .12s ease-out;
 }
 
-[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell):disabled {
+[data-style="claude"] :is(.text, .icon, .seg button, .segs .opt, .warm-tabs button, .field, .ag-link, .tile, .chip, .update, .sess-pick, .bar button, .cal-cell, .stepper .step-btn):disabled {
   cursor: default;
 }
 

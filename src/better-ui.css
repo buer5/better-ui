@@ -972,6 +972,15 @@ input.words.rule-match { flex: 1 1 auto; width: auto; min-width: 0; }
 }
 .prefs .val { display: inline-flex; align-items: center; gap: 2px; margin-left: auto; min-width: 0; max-width: 60%; flex: none; }
 .prefs .val .text { padding: 3px 6px; }
+/* ---------- stepper (numeric input with − / + buttons) ---------- */
+.stepper { display: inline-flex; align-items: center; height: 27px; border-radius: 7px; border: 1px solid var(--line); background: var(--card); overflow: hidden; transition: border-color .12s, box-shadow .12s; }
+.stepper:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.stepper input[type="number"] { width: 52px; height: 100%; border: 0; background: transparent; color: var(--fg); text-align: center; font: inherit; font-size: 12.5px; font-variant-numeric: tabular-nums; padding: 0 4px; outline: none; -moz-appearance: textfield; appearance: textfield; }
+.stepper input[type="number"]::-webkit-inner-spin-button,
+.stepper input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper .step-btn { width: 25px; height: 100%; border: 0; background: transparent; color: var(--fg-2); cursor: pointer; display: grid; place-items: center; font: inherit; font-size: 13px; line-height: 1; padding: 0; transition: background .12s, color .12s; }
+.stepper .step-btn:hover:not(:disabled) { background: var(--hover); color: var(--fg); }
+.stepper .step-btn:disabled { opacity: .35; cursor: default; }
 /* ---------- motion ----------
    One easing everywhere (iOS-ish: quick start, soft landing), short
    durations, small distances. Pressing gives a little, pages settle in,
