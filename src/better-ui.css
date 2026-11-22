@@ -843,14 +843,15 @@ body.window .foot { padding-left: 18px; }
 .editor :is(input.concurrency, input.queue-limit, input.queue-wait)[type] { width: 12em; max-width: 100%; }
 .editor input[type="number"] { -moz-appearance: textfield; }
 .editor input[type="number"]::-webkit-inner-spin-button, .editor input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.editor input[type="text"], .editor input[type="password"], .editor input[type="url"], .editor input[type="number"], .acc .kf input, .acc input.rename-in {
+.editor input[type="text"], .editor input[type="password"], .editor input[type="url"], .editor input[type="number"], .editor textarea, .acc .kf input, .acc input.rename-in {
   height: 27px; padding: 0 9px; border-radius: 7px;
-  border: 1px solid var(--line); background: var(--card);
-  font-size: 12.5px; outline: none; width: 100%; min-width: 0;
+  border: 1px solid var(--line); background: var(--card); color: var(--fg);
+  font-size: 12.5px; outline: none; width: 100%; min-width: 0; box-sizing: border-box;
   transition: border-color .12s, box-shadow .12s;
 }
-.editor input:focus, .editor .headers textarea.json:focus, .editor .extra-body textarea.json:focus, .acc input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); outline: none; }
-.editor input::placeholder, .acc input::placeholder { color: var(--faint); }
+.editor textarea { height: auto; min-height: 72px; padding: 7px 9px; font: inherit; font-size: 12.5px; line-height: 1.5; resize: vertical; }
+.editor input:focus, .editor textarea:focus, .acc input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); outline: none; }
+.editor input::placeholder, .editor textarea::placeholder, .acc input::placeholder { color: var(--faint); }
 .editor .pair { display: flex; gap: 8px; align-items: center; }
 .editor .pair input:first-child { flex: 1; }
 .editor .side { display: flex; gap: 4px; align-items: center; flex: none; min-width: 52px; justify-content: flex-end; }
